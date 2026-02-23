@@ -43,8 +43,7 @@
 
   <!-- LEFT DRAWING TOOLBAR -->
   <aside class="leftbar border-r">
-    <div class="tool-icon" [class.active]="activeDrawingTool === 'cursor'" (click)="setDrawingTool('cursor')"
-      title="Cursor">
+    <div class="tool-icon" [class.active]="activeDrawingTool === 'cursor'" (click)="setDrawingTool('cursor')" title="Cursor">
       <svg viewBox="0 0 24 24">
         <path d="M7 2l12 11.2h-5.8l3.3 7.3-2.2.9-3.2-7.4-4.4 4.7z" />
       </svg>
@@ -55,41 +54,49 @@
         <path d="M4 18l14-14 1.4 1.4-14 14z" />
       </svg>
     </div>
+    <div class="tool-icon" [class.active]="activeDrawingTool === 'horizontalStraightLine'"
+      (click)="setDrawingTool('horizontalStraightLine')" title="Support/Resistance">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 12h18v2H3z" />
+      </svg>
+    </div>
     <div class="tool-icon" [class.active]="activeDrawingTool === 'fibonacciLine'"
       (click)="setDrawingTool('fibonacciLine')" title="Fibonacci Retracement">
       <svg viewBox="0 0 24 24">
         <path d="M3 4h18v2H3zm3 4h12v2H6zm3 4h6v2H9zm-6 4h18v2H3z" />
       </svg>
     </div>
-    <div class="tool-icon" [class.active]="activeDrawingTool === 'horizontalStraightLine'"
-      (click)="setDrawingTool('horizontalStraightLine')" title="Horizontal Line">
+    <div class="tool-icon" [class.active]="activeDrawingTool === 'parallelStraightLine'"
+      (click)="setDrawingTool('parallelStraightLine')" title="Canal">
       <svg viewBox="0 0 24 24">
-        <path d="M3 12h18v2H3z" />
-      </svg>
-    </div>
-    <div class="tool-icon" [class.active]="activeDrawingTool === 'rectangle'"
-      (click)="setDrawingTool('rectangle')" title="Rectangle">
-      <svg viewBox="0 0 24 24">
-        <rect x="4" y="4" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2" />
+        <path d="M3 6l18 0v2L5 8v8l16 0v2L3 16z" />
       </svg>
     </div>
     <div class="tool-icon" [class.active]="activeDrawingTool === 'simpleAnnotation'"
-      (click)="setDrawingTool('simpleAnnotation')" title="Text">
+      (click)="setDrawingTool('simpleAnnotation')" title="Note">
       <svg viewBox="0 0 24 24">
         <path d="M4 4h16v3h-2V6H6v12h12v-1h2v3H4z M9 9h6v2H9z M9 13h6v2H9z" />
       </svg>
     </div>
+    <div class="tool-icon" [class.active]="activeDrawingTool === 'priceLine'"
+      (click)="setDrawingTool('priceLine')" title="Price Line">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 12h18v2H3z" />
+      </svg>
+    </div>
 
     <!-- helpful tip shown when a drawing tool is selected -->
-    <div class="drawing-instructions" *ngIf="activeDrawingTool !== 'cursor'">
+    <div class="drawing-instructions" *ngIf="activeDrawingTool && activeDrawingTool !== ''">
       <small>
         {{
+              activeDrawingTool === 'cursor' ? 'Use the cursor to select or pan, or click again to cancel' :
           activeDrawingTool === 'segment' ? 'Click to set endpoints of trend line; right‑click to delete' :
           activeDrawingTool === 'fibonacciLine' ? 'Click and drag for Fibonacci retracement' :
-          activeDrawingTool === 'horizontalStraightLine' ? 'Click to drop a horizontal line' :
-          activeDrawingTool === 'rectangle' ? 'Click to set two opposite corners of rectangle' :
-          activeDrawingTool === 'simpleAnnotation' ? 'Click to add a text annotation' :
-          'Use the cursor to draw'
+          activeDrawingTool === 'horizontalStraightLine' ? 'Click to drop a horizontal support/resistance' :
+          activeDrawingTool === 'parallelStraightLine' ? 'Click twice to draw a parallel channel' :
+          activeDrawingTool === 'simpleAnnotation' ? 'Click to add a text note' :
+          activeDrawingTool === 'priceLine' ? 'Click to add a horizontal price line' :
+          ''
         }}
       </small>
     </div>
