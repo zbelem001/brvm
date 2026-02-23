@@ -1,0 +1,187 @@
+<div class="tv-container">
+
+  <!-- TOP TOOLBAR -->
+  <header class="topbar border-b">
+    <div class="brand">BRVM VIEW</div>
+
+    <div class="toolbar-group">
+      <button class="btn symbol-search">{{ selectedAsset?.symbol }}</button>
+      <div class="divider"></div>
+
+      <!-- Timeframes -->
+      <button class="btn" [class.active]="timeframe === '1D'" (click)="setTimeframe('1D')">1D</button>
+      <button class="btn" [class.active]="timeframe === '1W'" (click)="setTimeframe('1W')">1W</button>
+      <button class="btn" [class.active]="timeframe === '1M'" (click)="setTimeframe('1M')">1M</button>
+
+      <div class="divider"></div>
+
+      <!-- Chart Type -->
+      <button class="btn" [class.active]="chartType==='candles'" (click)="setChartType('candles')">Candles</button>
+      <button class="btn" [class.active]="chartType==='line'" (click)="setChartType('line')">Line</button>
+
+      <div class="divider"></div>
+
+      <!-- Indicators dropdown -->
+      <div class="indicator-wrapper">
+        <button class="btn" [class.active]="showIndicatorMenu" (click)="toggleIndicatorMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          Indicators
+        </button>
+        <div class="indicator-menu" *ngIf="showIndicatorMenu">
+          <div class="indicator-item" (click)="toggleIndicator('rsi')">
+            <span class="indicator-dot" style="background:#2962FF"></span>
+            <span>RSI (14)</span>
+            <span class="indicator-check" *ngIf="indicators.rsi">✓</span>
+          </div>
+          <div class="indicator-item" (click)="toggleIndicator('macd')">
+            <span class="indicator-dot" style="background:#E040FB"></span>
+            <span>MACD (12,26,9)</span>
+            <span class="indicator-check" *ngIf="indicators.macd">✓</span>
+          </div>
+          <div class="indicator-item" (click)="toggleIndicator('bb')">
+            <span class="indicator-dot" style="background:#26C6DA"></span>
+            <span>Bollinger Bands</span>
+            <span class="indicator-check" *ngIf="indicators.bb">✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- LEFT DRAWING TOOLBAR -->
+  <aside class="leftbar border-r">
+    <div class="tool-icon" [class.active]="activeDrawingTool === 'cursor'" (click)="setDrawingTool('cursor')"
+      title="Cursor">
+      <svg viewBox="0 0 24 24">
+        <path d="M7 2l12 11.2h-5.8l3.3 7.3-2.2.9-3.2-7.4-4.4 4.7z" />
+      </svg>
+    </div>
+    <div class="tool-icon" [class.active]="activeDrawingTool === 'segment'" (click)="setDrawingTool('segment')"
+      title="Trend Line">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 18l14-14 1.4 1.4-14 14z" />
+      </svg>
+    </div>
+    <div class="tool-icon" [class.active]="activeDrawingTool === 'fibonacciLine'"
+      (click)="setDrawingTool('fibonacciLine')" title="Fibonacci Retracement">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 4h18v2H3zm3 4h12v2H6zm3 4h6v2H9zm-6 4h18v2H3z" />
+      </svg>
+    </div>
+    <div class="tool-icon" [class.active]="activeDrawingTool === 'horizontalStraightLine'"
+      (click)="setDrawingTool('horizontalStraightLine')" title="Horizontal Line">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 12h18v2H3z" />
+      </svg>
+    </div>
+    <div class="tool-icon" [class.active]="activeDrawingTool === 'simpleAnnotation'"
+      (click)="setDrawingTool('simpleAnnotation')" title="Text">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 4h16v3h-2V6H6v12h12v-1h2v3H4z M9 9h6v2H9z M9 13h6v2H9z" />
+      </svg>
+    </div>
+
+    <div class="spacer" style="flex: 1;"></div>
+
+    <div class="tool-icon text-red-500" (click)="removeDrawings()" title="Clear All Drawings">
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12z" />
+      </svg>
+    </div>
+  </aside>
+
+  <!-- MAIN CHART AREA -->
+  <main class="chart-area">
+
+    <!-- OHLCV legend overlay -->
+    <div class="chart-header-overlay" *ngIf="lastCandle && selectedAsset">
+      <div class="symbol-name">{{ selectedAsset?.name }} <span style="font-size:12px;color:#b2b5be;">BRVM</span></div>
+      <div class="ohlcv-legend">
+        <div class="ohlcv-item">O<span [ngClass]="lastCandle.close >= lastCandle.open ? 'price-up' : 'price-down'">{{
+            lastCandle.open | number:'1.0-2' }}</span></div>
+        <div class="ohlcv-item">H<span [ngClass]="lastCandle.close >= lastCandle.open ? 'price-up' : 'price-down'">{{
+            lastCandle.high | number:'1.0-2' }}</span></div>
+        <div class="ohlcv-item">L<span [ngClass]="lastCandle.close >= lastCandle.open ? 'price-up' : 'price-down'">{{
+            lastCandle.low | number:'1.0-2' }}</span></div>
+        <div class="ohlcv-item">C<span [ngClass]="lastCandle.close >= lastCandle.open ? 'price-up' : 'price-down'">{{
+            lastCandle.close | number:'1.0-2' }}</span></div>
+      </div>
+    </div>
+
+    <!-- KLineChart renders here -->
+    <div id="klinechart-main" class="chart-container"></div>
+  </main>
+
+  <!-- RIGHT WATCHLIST -->
+  <aside class="rightbar border-l">
+    <!-- ticker picker modal -->
+    <div class="modal-backdrop" *ngIf="showPicker" (click)="toggleTickerPicker()"></div>
+    <div class="ticker-picker" *ngIf="showPicker">
+      <div class="picker-header">
+        <input type="text" placeholder="Rechercher..." [(ngModel)]="pickerSearch" />
+        <button class="btn close-btn" (click)="toggleTickerPicker()">×</button>
+      </div>
+      <div class="picker-list">
+        <div class="picker-item" *ngFor="let t of filteredTickers()">
+          <span>{{ t.symbol }} - {{ t.name }}</span>
+          <button class="btn"
+            [class.added]="watchlistSymbols.has(t.symbol)"
+            (click)="toggleSymbol($event, t.symbol)">
+            {{ watchlistSymbols.has(t.symbol) ? '−' : '+' }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-header border-b">
+      Watchlist &amp; Details
+      <button class="btn add-btn" title="Manage symbols" (click)="toggleTickerPicker()">+</button>
+    </div>
+
+    <div class="watchlist">
+      <div class="watchlist-item" *ngFor="let asset of watchlist"
+        [class.active]="asset.symbol === selectedAsset?.symbol"
+        (click)="selectAsset(asset)">
+        <span class="watchlist-symbol">{{ asset.symbol }}</span>
+        <div class="watchlist-price-col">
+          <span class="watchlist-price">{{ asset.price }}</span>
+          <span class="watchlist-change badge" [class.up]="asset.change >= 0" [class.down]="asset.change < 0">
+            {{ asset.change >= 0 ? '+' : '' }}{{ asset.change }}%
+          </span>
+          <button class="btn remove-btn" title="Remove" (click)="removeSymbol(asset.symbol); $event.stopPropagation()">×</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="details-widget" *ngIf="selectedAsset">
+      <div style="font-weight:bold;font-size:1rem;margin-bottom:8px;">{{ selectedAsset?.symbol }}</div>
+      <div class="detail-row">
+        <span class="detail-lbl">Company</span>
+        <span class="detail-val">{{ selectedAsset?.name }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-lbl">Market</span>
+        <span class="detail-val">BRVM</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-lbl">Sector</span>
+        <span class="detail-val">{{ selectedAsset?.sector || 'Equities' }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-lbl">Last Price</span>
+        <span class="detail-val" [ngClass]="selectedAsset?.change >= 0 ? 'price-up' : 'price-down'">{{
+          selectedAsset?.price }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-lbl">Change</span>
+        <span class="detail-val" [ngClass]="selectedAsset?.change >= 0 ? 'price-up' : 'price-down'">
+          {{ selectedAsset?.change >= 0 ? '+' : '' }}{{ selectedAsset?.change }}%
+        </span>
+      </div>
+    </div>
+  </aside>
+
+</div>
