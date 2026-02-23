@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -66,6 +66,22 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
   private resizeObserver!: ResizeObserver;
 
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
+
+  // close indicator dropdown when user clicks anywhere outside it
+  @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: MouseEvent) {
+    if (this.showIndicatorMenu) {
+      // if the click target is not inside the indicator wrapper, hide menu
+      const path = event.composedPath ? event.composedPath() : [];
+      const clickedInside = path.some((el: any) => {
+        return el && el.classList && el.classList.contains && el.classList.contains('indicator-wrapper');
+      });
+      if (!clickedInside) {
+        this.showIndicatorMenu = false;
+        this.cdr.detectChanges();
+      }
+    }
+  }
 
   ngOnInit() {
     this.loadTickers();
