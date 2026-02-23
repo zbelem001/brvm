@@ -22,7 +22,7 @@
       <div class="divider"></div>
 
       <!-- Indicators dropdown -->
-      <div class="indicator-wrapper">
+      <div class="indicator-wrapper" (click)="$event.stopPropagation()">
         <button class="btn" [class.active]="showIndicatorMenu" (click)="toggleIndicatorMenu()">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -31,20 +31,10 @@
           Indicators
         </button>
         <div class="indicator-menu" *ngIf="showIndicatorMenu">
-          <div class="indicator-item" (click)="toggleIndicator('rsi')">
-            <span class="indicator-dot" style="background:#2962FF"></span>
-            <span>RSI (14)</span>
-            <span class="indicator-check" *ngIf="indicators.rsi">✓</span>
-          </div>
-          <div class="indicator-item" (click)="toggleIndicator('macd')">
-            <span class="indicator-dot" style="background:#E040FB"></span>
-            <span>MACD (12,26,9)</span>
-            <span class="indicator-check" *ngIf="indicators.macd">✓</span>
-          </div>
-          <div class="indicator-item" (click)="toggleIndicator('bb')">
-            <span class="indicator-dot" style="background:#26C6DA"></span>
-            <span>Bollinger Bands</span>
-            <span class="indicator-check" *ngIf="indicators.bb">✓</span>
+          <div class="indicator-item" *ngFor="let ind of indicatorList" (click)="toggleIndicator(ind.code)">
+            <span class="indicator-dot" [style.background]="ind.color || '#999'"></span>
+            <span>{{ ind.label }}</span>
+            <span class="indicator-check" *ngIf="indicators[ind.code]">✓</span>
           </div>
         </div>
       </div>
@@ -77,6 +67,12 @@
         <path d="M3 12h18v2H3z" />
       </svg>
     </div>
+    <div class="tool-icon" [class.active]="activeDrawingTool === 'rectangle'"
+      (click)="setDrawingTool('rectangle')" title="Rectangle">
+      <svg viewBox="0 0 24 24">
+        <rect x="4" y="4" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2" />
+      </svg>
+    </div>
     <div class="tool-icon" [class.active]="activeDrawingTool === 'simpleAnnotation'"
       (click)="setDrawingTool('simpleAnnotation')" title="Text">
       <svg viewBox="0 0 24 24">
@@ -84,7 +80,29 @@
       </svg>
     </div>
 
+    <!-- helpful tip shown when a drawing tool is selected -->
+    <div class="drawing-instructions" *ngIf="activeDrawingTool !== 'cursor'">
+      <small>
+        {{
+          activeDrawingTool === 'segment' ? 'Click to set endpoints of trend line; right‑click to delete' :
+          activeDrawingTool === 'fibonacciLine' ? 'Click and drag for Fibonacci retracement' :
+          activeDrawingTool === 'horizontalStraightLine' ? 'Click to drop a horizontal line' :
+          activeDrawingTool === 'rectangle' ? 'Click to set two opposite corners of rectangle' :
+          activeDrawingTool === 'simpleAnnotation' ? 'Click to add a text annotation' :
+          'Use the cursor to draw'
+        }}
+      </small>
+    </div>
+
     <div class="spacer" style="flex: 1;"></div>
+
+    <!-- undo button appears only when we have history -->
+    <div class="tool-icon" *ngIf="overlayIds.length" (click)="undoDrawing()" title="Undo Last Drawing">
+      <!-- left arrow icon -->
+      <svg viewBox="0 0 24 24">
+        <path d="M12 4l-8 8 8 8v-6h8v-4h-8z" />
+      </svg>
+    </div>
 
     <div class="tool-icon text-red-500" (click)="removeDrawings()" title="Clear All Drawings">
       <svg viewBox="0 0 24 24">

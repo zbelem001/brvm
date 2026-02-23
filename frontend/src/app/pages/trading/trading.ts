@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, HostLis
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { init, dispose, Chart, KLineData } from 'klinecharts';
+import { init, dispose, Chart, KLineData, getSupportedIndicators } from 'klinecharts';
 
 @Component({
   selector: 'app-trading',
@@ -49,10 +49,28 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
   lastCandle: any = null;
   showIndicatorMenu = false;
 
-  indicators = { rsi: false, macd: false, bb: false };
-  private indicatorPaneIds: Record<string, string | null> = { rsi: null, macd: null, bb: null };
+  // indicator names correspond to the ones passed to chart.createIndicator()
+  // indicators available for toggling.  `code` is the actual name
+  // understood by klinecharts; `label` is what we show in the menu.
+  indicatorList: Array<{ code: string; label: string; color?: string }> = [
+    { code: 'RSI', label: 'RSI (14)', color: '#2962FF' },
+    { code: 'MACD', label: 'MACD (12,26,9)', color: '#E040FB' },
+    { code: 'BOLL', label: 'Bollinger Bands', color: '#26C6DA' },
+    { code: 'MA', label: 'MA (20/50/200)', color: '#FFB300' },
+    { code: 'EMA', label: 'EMA', color: '#FF5722' },
+    { code: 'SMA', label: 'SMA', color: '#8BC34A' },
+    { code: 'VOL', label: 'Volume', color: '#9E9E9E' },
+    { code: 'OBV', label: 'On Balance Volume', color: '#607D8B' },
+    { code: 'KDJ', label: 'Stochastique', color: '#FF4081' }
+  ];
+
+  // runtime state for whether an indicator is currently shown
+  indicators: Record<string, boolean> = {};
+  // pane IDs are derived from the code, no need to remember separately
 
   activeDrawingTool = 'cursor';
+  // keep a history of created overlay ids so we can undo or clear
+  overlayIds: string[] = [];
 
   // ticker picker state
   showPicker = false;
@@ -89,6 +107,8 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.initChart();
+    // initialise indicator flags
+    this.indicatorList.forEach(i => (this.indicators[i.code] = false));
     // loadWatchlist will be called once tickers are loaded/selection ready
   }
 
@@ -216,77 +236,206 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
   // ─── Indicators ───────────────────────────────────────────────────────
   toggleIndicatorMenu() { this.showIndicatorMenu = !this.showIndicatorMenu; }
 
-  toggleIndicator(name: 'rsi' | 'macd' | 'bb') {
-    if (!this.chart) return;
-    this.indicators[name] = !this.indicators[name];
+  /**
+   * Add new indicator names to the available set.  Existing names (either
+   * already present in UI or not supported by the library) are ignored.
+   */
+  /**
+   * Add indicators programmatically.  Each entry can be a string code or an
+   * object with { code, label, color }.  Duplicates and unsupported codes are
+   * filtered out.
+   */
+  addIndicators(entries: Array<string | { code: string; label?: string; color?: string }>) {
+    const supported = getSupportedIndicators();
+    entries.forEach(entry => {
+      let code: string, label: string | undefined, color: string | undefined;
+      if (typeof entry === 'string') {
+        code = entry;
+      } else {
+        code = entry.code;
+        label = entry.label;
+        color = entry.color;
+      }
+      if (!supported.includes(code)) return;
+      if (this.indicatorList.find(i => i.code === code)) return;
+      this.indicatorList.push({ code, label: label ?? code, color });
+      this.indicators[code] = false;
+    });
+  }
 
-    if (this.indicators[name]) {
-      switch (name) {
-        case 'rsi':
-          this.indicatorPaneIds['rsi'] = this.chart.createIndicator('RSI', false, { id: 'pane_rsi', height: 100 });
-          break;
-        case 'macd':
-          this.indicatorPaneIds['macd'] = this.chart.createIndicator('MACD', false, { id: 'pane_macd', height: 120 });
-          break;
-        case 'bb':
-          this.chart.createIndicator('BOLL', true, { id: 'candle_pane' });
-          break;
+
+
+  toggleIndicator(code: string) {
+    if (!this.chart) return;
+    this.indicators[code] = !this.indicators[code];
+
+    if (this.indicators[code]) {
+      if (code === 'BOLL') {
+        // overlay on candle pane rather than own pane
+        this.chart.createIndicator(code, true, { id: 'candle_pane' });
+      } else {
+        const paneId = `pane_${code.toLowerCase()}`;
+        this.chart.createIndicator(code, false, { id: paneId, height: 100 });
       }
     } else {
-      switch (name) {
-        case 'rsi':
-          if (this.indicatorPaneIds['rsi']) this.chart.removeIndicator({ paneId: 'pane_rsi' });
-          this.indicatorPaneIds['rsi'] = null;
-          break;
-        case 'macd':
-          if (this.indicatorPaneIds['macd']) this.chart.removeIndicator({ paneId: 'pane_macd' });
-          this.indicatorPaneIds['macd'] = null;
-          break;
-        case 'bb':
-          this.chart.removeIndicator({ paneId: 'candle_pane', name: 'BOLL' });
-          break;
+      if (code === 'BOLL') {
+        this.chart.removeIndicator({ paneId: 'candle_pane', name: code });
+      } else {
+        const paneId = `pane_${code.toLowerCase()}`;
+        this.chart.removeIndicator({ paneId, name: code });
       }
     }
   }
 
   // ─── Drawing Tools ────────────────────────────────────────────────────
+  /**
+   * Activate a drawing mode. Clicking the same icon again (or choosing
+   * "cursor") will return to the default pointer.  When we create an overlay
+   * we keep track of the id so that we can implement undo/clear features.
+   */
   setDrawingTool(tool: string) {
+    // toggle off if user clicked the current tool or explicitly chose cursor
+    if (this.activeDrawingTool === tool || tool === 'cursor') {
+      this.activeDrawingTool = 'cursor';
+      this.cdr.detectChanges();
+      return;
+    }
+
     this.activeDrawingTool = tool;
-    if (this.chart && tool !== 'cursor') {
-      this.chart.createOverlay({
-        name: tool,
-        styles: {
-          line: { color: '#2196f3', size: 2 }
-        },
-        onRightClick: (event) => {
-          this.chart?.removeOverlay({ id: event.overlay.id });
+
+    if (this.chart) {
+      // choose a colour per tool and make the lines thinner (size=1)
+      const toolStyles: Record<string, { color: string; size: number }> = {
+        cursor: { color: '#000000', size: 1 },
+        segment: { color: '#2196f3', size: 1 },
+        fibonacciLine: { color: '#4caf50', size: 1 },
+        horizontalStraightLine: { color: '#f44336', size: 1 },
+        simpleAnnotation: { color: '#9c27b0', size: 1 },
+        rectangle: { color: '#ffa726', size: 1 } // orange box
+      };
+      const baseStyle = toolStyles[tool] || { color: '#2196f3', size: 1 };
+
+      // build callbacks that are shared across tools
+      const callbacks: any = {
+        onRightClick: (event: any) => {
+          const id = event.overlay.id;
+          // remove from chart and history stack
+          this.chart?.removeOverlay({ id });
+          this.overlayIds = this.overlayIds.filter(x => x !== id);
           return true;
         },
-        onMouseEnter: (event) => {
+        onMouseEnter: (event: any) => {
           this.chart?.overrideOverlay({
             id: event.overlay.id,
             styles: {
-              line: { color: '#ffb74d', size: 3 },
+              line: { color: '#ffb74d', size: 2 },
               text: { backgroundColor: '#ffb74d' }
             }
           });
         },
-        onMouseLeave: (event) => {
+        onMouseLeave: (event: any) => {
           this.chart?.overrideOverlay({
             id: event.overlay.id,
             styles: {
-              line: { color: '#2196f3', size: 2 },
-              text: { backgroundColor: '#2196f3' }
+              line: { color: baseStyle.color, size: baseStyle.size },
+              text: { backgroundColor: baseStyle.color }
             }
           });
         }
-      });
+      };
+
+      // if the selected tool is Fibonacci, add a draw-end hook that
+      // keeps only the first two anchor points so the retracement is
+      // limited to the span between them.
+      if (tool === 'fibonacciLine') {
+        callbacks.onDrawEnd = (event: any) => {
+          const ov = event.overlay;
+          if (ov.points && ov.points.length > 2) {
+            ov.points = ov.points.slice(0, 2);
+            this.chart?.overrideOverlay({ id: ov.id, points: ov.points });
+          }
+        };
+      }
+
+      // build overlay configuration; rectangle needs custom point figures
+      let overlayConfig: any;
+      if (tool === 'rectangle') {
+        overlayConfig = {
+          name: 'rectangle',
+          totalStep: 2,
+          needDefaultPointFigure: true,
+          needDefaultXAxisFigure: true,
+          needDefaultYAxisFigure: true,
+          createPointFigures: ({ coordinates }: { coordinates: any[] }) => {
+            if (coordinates.length === 2) {
+              const p1 = coordinates[0];
+              const p2 = coordinates[1];
+              return [
+                {
+                  type: 'line',
+                  attrs: { coordinates: [{ x: p1.x, y: p1.y }, { x: p2.x, y: p1.y }] }
+                },
+                {
+                  type: 'line',
+                  attrs: { coordinates: [{ x: p2.x, y: p1.y }, { x: p2.x, y: p2.y }] }
+                },
+                {
+                  type: 'line',
+                  attrs: { coordinates: [{ x: p2.x, y: p2.y }, { x: p1.x, y: p2.y }] }
+                },
+                {
+                  type: 'line',
+                  attrs: { coordinates: [{ x: p1.x, y: p2.y }, { x: p1.x, y: p1.y }] }
+                }
+              ];
+            }
+            return [];
+          },
+          styles: { line: { color: baseStyle.color, size: baseStyle.size } },
+          ...callbacks
+        };
+      } else {
+        overlayConfig = {
+          name: tool,
+          styles: { line: { color: baseStyle.color, size: baseStyle.size } },
+          ...callbacks
+        };
+      }
+
+      // createOverlay returns an id (or array of ids) immediately
+      const created = this.chart.createOverlay(overlayConfig);
+
+      // store id(s) for undo
+      if (created) {
+        if (Array.isArray(created)) {
+          this.overlayIds.push(...(created.filter(Boolean) as string[]));
+        } else {
+          this.overlayIds.push(created as string);
+        }
+      }
+    }
+    this.cdr.detectChanges();
+  }
+
+  /**
+   * Remove the most recently created overlay (undo).
+   */
+  undoDrawing() {
+    if (this.chart && this.overlayIds.length) {
+      const id = this.overlayIds.pop();
+      if (id) {
+        this.chart.removeOverlay({ id });
+      }
     }
   }
 
+  /**
+   * Clear all drawings and reset history.
+   */
   removeDrawings() {
     if (this.chart) {
       this.chart.removeOverlay();
+      this.overlayIds = [];
     }
   }
 
@@ -344,6 +493,10 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     if (!this.chart) return;
+
+    // Instead of relying on an unsupported registerOverlay method we will
+    // build a rectangle overlay template and pass it directly to
+    // createOverlay when the user selects the rectangle tool.
 
     // DataLoader Integration
     console.log('Setting up DataLoader...');
