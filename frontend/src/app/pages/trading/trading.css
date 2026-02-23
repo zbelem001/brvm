@@ -1,0 +1,340 @@
+:host {
+    display: block;
+    /* make the container span the full viewport so watchlist scrolling
+       doesn’t expand the page and push the chart downward */
+    height: 100vh;
+    width: 100%;
+    background-color: #131722;
+    /* TradingView dark theme background */
+    color: #d1d4dc;
+    font-family: -apple-system, BlinkMacSystemFont, "Trebuchet MS", Roboto, Ubuntu, sans-serif;
+    overflow: hidden;
+}
+
+.tv-container {
+    display: grid;
+    grid-template-areas:
+        "topbar topbar topbar"
+        "leftbar chart rightbar";
+    grid-template-columns: 52px 1fr 300px;
+    grid-template-rows: 52px 1fr;
+    /* with the host sized to 100vh, the container can likewise use full
+       height rather than growing with its content */
+    height: 100%;
+    width: 100%;
+}
+
+/* Colors and borders matching TV */
+.border-b {
+    border-bottom: 1px solid #2a2e39;
+}
+
+.border-r {
+    border-right: 1px solid #2a2e39;
+}
+
+.border-l {
+    border-left: 1px solid #2a2e39;
+}
+
+/* Top Navigation Bar */
+.topbar {
+    grid-area: topbar;
+    background-color: #1e222d;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 16px;
+    z-index: 10;
+}
+
+.brand {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #2962ff;
+    /* TV Blue */
+    margin-right: 16px;
+}
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.divider {
+    width: 1px;
+    height: 24px;
+    background: #2a2e39;
+    margin: 0 8px;
+}
+
+.btn {
+    background: transparent;
+    border: none;
+    color: #b2b5be;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn:hover {
+    background: #2a2e39;
+    color: #d1d4dc;
+}
+
+.btn.active {
+    color: #2962ff;
+}
+
+.symbol-search {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #d1d4dc;
+}
+
+/* Left Drawing Toolbar */
+.leftbar {
+    grid-area: leftbar;
+    background-color: #1e222d;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+    align-items: center;
+    gap: 8px;
+}
+
+.tool-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #b2b5be;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tool-icon:hover {
+    background: #2a2e39;
+    color: #d1d4dc;
+}
+
+.tool-icon.active {
+    background: rgba(41, 98, 255, 0.15);
+    color: #2962ff;
+}
+
+.tool-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* Main Chart Area */
+.chart-area {
+    grid-area: chart;
+    background-color: #131722;
+    position: relative;
+    overflow: hidden;
+    /* allow the grid cell to shrink below its content size so the right
+       sidebar cannot push the whole grid taller than the viewport */
+    min-height: 0;
+}
+
+.chart-header-overlay {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+}
+
+.symbol-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.ohlcv-legend {
+    font-size: 0.85rem;
+    display: flex;
+    gap: 12px;
+    color: #b2b5be;
+}
+
+.ohlcv-item span {
+    color: #d1d4dc;
+    font-family: "Monaco", "Consolas", monospace;
+    margin-left: 4px;
+}
+
+.price-up {
+    color: #089981 !important;
+}
+
+.price-down {
+    color: #f23645 !important;
+}
+
+.chart-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* Right Watchlist Sidebar */
+.rightbar {
+    grid-area: rightbar;
+    background-color: #1e222d;
+    display: flex;
+    flex-direction: column;
+    /* ensure this column can shrink and that its child (.watchlist) can
+       scroll rather than stretch the grid */
+    min-height: 0;
+}
+
+.sidebar-header {
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.watchlist {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.watchlist-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #2a2e39;
+}
+
+.watchlist-item:hover {
+    background: #2a2e39;
+}
+
+.watchlist-item.active {
+    background: rgba(41, 98, 255, 0.1);
+    border-left: 2px solid #2962ff;
+}
+
+.watchlist-symbol {
+    font-weight: 600;
+}
+
+.watchlist-price-col {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 120px;
+}
+
+.watchlist-price {
+    font-variant-numeric: tabular-nums;
+}
+
+.watchlist-change {
+    width: 50px;
+    text-align: right;
+}
+
+.badge {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    background: #363a45;
+}
+
+.badge.up {
+    background: rgba(8, 153, 129, 0.2);
+    color: #089981;
+}
+
+.badge.down {
+    background: rgba(242, 54, 69, 0.2);
+    color: #f23645;
+}
+
+/* Details widget (bottom of rightbar) */
+.details-widget {
+    height: 250px;
+    border-top: 1px solid #2a2e39;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+}
+
+.detail-lbl {
+    color: #b2b5be;
+}
+
+.detail-val {
+    font-weight: 600;
+}
+
+/* Indicator dropdown */
+.indicator-wrapper {
+    position: relative;
+}
+
+.indicator-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: #1e222d;
+    border: 1px solid #2a2e39;
+    border-radius: 6px;
+    padding: 6px 0;
+    z-index: 100;
+    min-width: 210px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.indicator-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #d1d4dc;
+    transition: background 0.15s;
+}
+
+.indicator-item:hover {
+    background: #2a2e39;
+}
+
+.indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.indicator-check {
+    margin-left: auto;
+    color: #2962ff;
+    font-weight: bold;
+}
