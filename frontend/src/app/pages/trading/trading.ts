@@ -307,6 +307,20 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   toggleIndicator(code: string) {
     if (!this.chart) return;
+
+    // ensure we're not left in a drawing mode; toggling an indicator is a
+    // UI action and should behave like selecting the cursor.  Otherwise the
+    // user might be unable to pan the chart because an active drawing tool
+    // intercepts mouse events.
+    if (this.activeDrawingTool !== 'cursor') {
+      this.activeDrawingTool = 'cursor';
+      // cancel any incomplete overlay
+      if (this.pendingOverlayIds.length && this.chart) {
+        this.pendingOverlayIds.forEach(id => this.chart?.removeOverlay({ id }));
+        this.pendingOverlayIds = [];
+      }
+    }
+
     this.indicators[code] = !this.indicators[code];
 
     if (this.indicators[code]) {
