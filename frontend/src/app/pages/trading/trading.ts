@@ -595,18 +595,28 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
     // createOverlay when the user selects the rectangle tool.
 
     // DataLoader Integration
+    // we pad the requested range by a number of bars so that the chart has a
+    // buffer and the user can immediately pan left/right even with the
+    // default one‑day span.  the backend simply returns all data and the
+    // chart will slice as needed, so we don't need to modify the API.
     console.log('Setting up DataLoader...');
     this.chart.setDataLoader({
       getBars: (params) => {
         console.log('getBars called with params:', params);
-        const { symbol, callback } = params;
+        const { symbol, from, to, callback } = params as any;
         if (!this.selectedAsset) {
           console.warn('getBars called but selectedAsset is null');
           callback([], false);
           return;
         }
 
-        const url = `${this.apiUrl}/history/${this.selectedAsset.symbol}`;
+        // pad by 30 days on each side (milliseconds)
+        const padMs = 30 * 24 * 60 * 60 * 1000;
+        const paddedFrom = new Date(from).getTime() - padMs;
+        const paddedTo   = new Date(to).getTime()   + padMs;
+
+        const url = `${this.apiUrl}/history/${this.selectedAsset.symbol}` +
+                    `?from=${paddedFrom}&to=${paddedTo}`;
         console.log('Fetching history from:', url);
         this.http.get<any>(url).subscribe({
           next: (response) => {
