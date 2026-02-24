@@ -423,8 +423,9 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     };
 
-    // when the drawing completes we need to record the id and possibly
-    // restart another overlay
+    // when the drawing completes we need to record the id and then
+    // automatically switch back to the cursor.  the user must click the
+    // tool icon again to begin a new shape.
     callbacks.onDrawEnd = (event: any) => {
       const id = event.overlay.id;
       // remove from pending list (might have been cancelled already)
@@ -434,11 +435,9 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
         this.overlayIds.push(id);
         this.overlayTimeframe[id] = this._timeframe;
       }
-      // if tool still active, start another overlay
-      if (this.activeDrawingTool === tool) {
-        // small delay to avoid recursion inside event handler
-        setTimeout(() => this.startDrawing(tool), 0);
-      }
+      // revert to cursor mode after one drawing
+      this.activeDrawingTool = 'cursor';
+      this.cdr.detectChanges();
     };
 
     // special handling for fibonacci to cap points
@@ -499,12 +498,13 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
       };
     }
 
-    // start the overlay and remember the id(s) so we can cancel later if needed
+    // start the overlay and remember its id in case the user presses
+    // cursor before finishing.
     const created = this.chart.createOverlay(overlayConfig);
-    const addPending = (id: string) => {
-      if (id) this.pendingOverlayIds.push(id);
-    };
     if (created) {
+      const addPending = (id: string) => {
+        if (id) this.pendingOverlayIds.push(id);
+      };
       if (Array.isArray(created)) {
         (created.filter(Boolean) as string[]).forEach(addPending);
       } else {
