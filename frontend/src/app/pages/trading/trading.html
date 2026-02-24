@@ -89,13 +89,13 @@
     <div class="drawing-instructions" *ngIf="activeDrawingTool && activeDrawingTool !== ''">
       <small>
         {{
-              activeDrawingTool === 'cursor' ? 'Use the cursor to select or pan, or click again to cancel' :
-          activeDrawingTool === 'segment' ? 'Click to set endpoints of trend line; right‑click to delete' :
-          activeDrawingTool === 'fibonacciLine' ? 'Click and drag for Fibonacci retracement' :
-          activeDrawingTool === 'horizontalStraightLine' ? 'Click to drop a horizontal support/resistance' :
-          activeDrawingTool === 'parallelStraightLine' ? 'Click twice to draw a parallel channel' :
-          activeDrawingTool === 'simpleAnnotation' ? 'Click to add a text note' :
-          activeDrawingTool === 'priceLine' ? 'Click to add a horizontal price line' :
+              activeDrawingTool === 'cursor' ? 'Use the cursor to select or pan, or click again to cancel any drawing in progress' :
+          activeDrawingTool === 'segment' ? 'Click to set endpoints of trend line; right‑click to delete. Tool stays active until you cancel with cursor or click icon again' :
+          activeDrawingTool === 'fibonacciLine' ? 'Click and drag for Fibonacci retracement. Repeat as needed; cancel with cursor or icon' :
+          activeDrawingTool === 'horizontalStraightLine' ? 'Click to drop a horizontal support/resistance; use cursor to stop drawing' :
+          activeDrawingTool === 'parallelStraightLine' ? 'Click twice to draw a parallel channel; stays active until cancelled' :
+          activeDrawingTool === 'simpleAnnotation' ? 'Click to add a text note; click icon or cursor to exit' :
+          activeDrawingTool === 'priceLine' ? 'Click to add a horizontal price line; cancel with cursor or icon' :
           ''
         }}
       </small>
@@ -152,7 +152,12 @@
       </div>
       <div class="picker-list">
         <div class="picker-item" *ngFor="let t of filteredTickers()">
-          <span>{{ t.symbol }} - {{ t.name }}</span>
+          <span>
+            {{ t.symbol }} - {{ t.name }}
+            <span class="picker-change" [ngClass]="t.change >= 0 ? 'price-up' : 'price-down'">
+              ({{ t.change | number:'1.2-2' }}%)
+            </span>
+          </span>
           <button class="btn"
             [class.added]="watchlistSymbols.has(t.symbol)"
             (click)="toggleSymbol($event, t.symbol)">

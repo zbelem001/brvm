@@ -24,6 +24,17 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
     this._timeframe = tf;
     if (this.dailyData.length && this.chart) {
       this.chart.resetData(); // Triggers a reload via DataLoader
+      // after the data is reloaded we need to hide any overlays that were
+      // drawn in a different timeframe – the library renders them according
+      // to their original timestamps, so they would otherwise pollute the
+      // new view (especially obvious when going from 15m/1h to 1M).
+      Object.keys(this.overlayTimeframe).forEach(id => {
+        const created = this.overlayTimeframe[id];
+        const visible = created === this._timeframe;
+        // overrideOverlay supports `visible` flag; if it doesn't the
+        // alternative is to remove/restore or apply a transparent style.
+        this.chart?.overrideOverlay({ id, visible });
+      });
     }
     this.cdr.detectChanges();
   }
@@ -71,12 +82,18 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
   activeDrawingTool = 'cursor';
   // keep a history of created overlay ids so we can undo or clear
   overlayIds: string[] = [];
+  // remember which timeframe each overlay was created in so we can
+  // selectively hide/show when the user switches period
+  overlayTimeframe: Record<string, '1D' | '1W' | '1M'> = {};
 
   // ticker picker state
   showPicker = false;
   pickerSearch = '';
   allTickers: any[] = [];
   watchlistSymbols: Set<string> = new Set();
+
+  // latest price/change info for each ticker (populated from API)
+  tickerInfo: Record<string, any> = {};
 
   // ─── Chart ────────────────────────────────────────────────────────────
   private chart: Chart | null = null;
@@ -124,6 +141,15 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
     this.http.get<any[]>(`${this.apiUrl}/tickers-list`).subscribe({
       next: (data) => {
         this.allTickers = data;
+
+        // pre-populate tickerInfo from response if it already contains change
+        this.tickerInfo = {};
+        this.allTickers.forEach(t => {
+          if (t.chg !== undefined) {
+            this.tickerInfo[t.symbol] = t;
+          }
+        });
+
         // restore user selection from localStorage
         const stored = localStorage.getItem('watchlistSymbols');
         if (stored) {
@@ -144,6 +170,12 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
   loadWatchlist() {
     this.http.get<any[]>(`${this.apiUrl}/watchlist`).subscribe({
       next: (data: any[]) => {
+        // remember full result in tickerInfo for use by picker
+        this.tickerInfo = {};
+        data.forEach(item => {
+          this.tickerInfo[item.symbol] = item;
+        });
+
         // filter backend results by selection set; if set is empty show all
         const filtered = data.filter(item =>
           this.watchlistSymbols.size === 0 || this.watchlistSymbols.has(item.symbol)
@@ -186,10 +218,18 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   filteredTickers() {
     const term = this.pickerSearch.toLowerCase();
-    return this.allTickers.filter(t =>
-      t.symbol.toLowerCase().includes(term) ||
-      (t.name && t.name.toLowerCase().includes(term))
-    );
+    return this.allTickers
+      .filter(t =>
+        t.symbol.toLowerCase().includes(term) ||
+        (t.name && t.name.toLowerCase().includes(term))
+      )
+      .map(t => {
+        const info = this.tickerInfo[t.symbol] || {};
+        return {
+          ...t,
+          change: info.chg !== undefined ? parseFloat(info.chg.toFixed(2)) : 0
+        };
+      });
   }
 
   toggleSymbol(event: MouseEvent, symbol: string) {
@@ -290,131 +330,173 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
   // ─── Drawing Tools ────────────────────────────────────────────────────
   /**
    * Activate a drawing mode. Clicking the same icon again (or choosing
-   * "cursor") will return to the default pointer.  When we create an overlay
-   * we keep track of the id so that we can implement undo/clear features.
+   * "cursor") will return to the default pointer and cancel any pending
+   * (unfinished) overlay.  When a tool is active we create a new overlay as
+   * soon as the previous one is finished, so the user can draw continuously
+   * until they explicitly toggle the tool off.
    */
+
+  // IDs of overlays that have been started but not yet completed (pending).
+  pendingOverlayIds: string[] = [];
+
   setDrawingTool(tool: string) {
-    // toggle off if user clicked the current tool or explicitly chose cursor
+    // if switching away from the current tool (including to cursor) we need
+    // to cancel any in‑progress drawing.
     if (this.activeDrawingTool === tool || tool === 'cursor') {
+      // remove any pending overlays that were never finished
+      if (this.pendingOverlayIds.length && this.chart) {
+        this.pendingOverlayIds.forEach(id => this.chart?.removeOverlay({ id }));
+        this.pendingOverlayIds = [];
+      }
+
       this.activeDrawingTool = 'cursor';
       this.cdr.detectChanges();
       return;
     }
 
+    // activate a new drawing tool and start the first overlay
     this.activeDrawingTool = tool;
+    this.startDrawing(tool);
+    this.cdr.detectChanges();
+  }
 
-    if (this.chart) {
-      // choose a colour per tool and make the lines thinner (size=1)
-      const toolStyles: Record<string, { color: string; size: number }> = {
-        cursor: { color: '#000000', size: 1 },
-        segment: { color: '#2196f3', size: 1 },
-        fibonacciLine: { color: '#4caf50', size: 1 },
-        horizontalStraightLine: { color: '#f44336', size: 1 },
-        simpleAnnotation: { color: '#9c27b0', size: 1 },
-        rectangle: { color: '#ffa726', size: 1 } // orange box
-      };
-      const baseStyle = toolStyles[tool] || { color: '#2196f3', size: 1 };
+  /**
+   * Begin drawing using the given tool.  This method builds the necessary
+   * callbacks/styles, starts the overlay, and arranges for the overlay id to
+   * be moved from the pending list to the undo history when the user finishes
+   * drawing.  If the tool is still active after completion we immediately
+   * start a fresh overlay so the user can draw repeatedly.
+   */
+  private startDrawing(tool: string) {
+    if (!this.chart) return;
 
-      // build callbacks that are shared across tools
-      const callbacks: any = {
-        onRightClick: (event: any) => {
-          const id = event.overlay.id;
-          // remove from chart and history stack
-          this.chart?.removeOverlay({ id });
-          this.overlayIds = this.overlayIds.filter(x => x !== id);
-          return true;
-        },
-        onMouseEnter: (event: any) => {
-          this.chart?.overrideOverlay({
-            id: event.overlay.id,
-            styles: {
-              line: { color: '#ffb74d', size: 2 },
-              text: { backgroundColor: '#ffb74d' }
-            }
-          });
-        },
-        onMouseLeave: (event: any) => {
-          this.chart?.overrideOverlay({
-            id: event.overlay.id,
-            styles: {
-              line: { color: baseStyle.color, size: baseStyle.size },
-              text: { backgroundColor: baseStyle.color }
-            }
-          });
-        }
-      };
+    // choose a colour per tool and make the lines thinner (size=1)
+    const toolStyles: Record<string, { color: string; size: number }> = {
+      segment: { color: '#2196f3', size: 1 },
+      horizontalStraightLine: { color: '#f44336', size: 1 },
+      fibonacciLine: { color: '#4caf50', size: 1 },
+      parallelStraightLine: { color: '#ff9800', size: 1 },
+      simpleAnnotation: { color: '#9c27b0', size: 1 },
+      priceLine: { color: '#03a9f4', size: 1 }
+    };
+    const baseStyle = toolStyles[tool] || { color: '#2196f3', size: 1 };
 
-      // if the selected tool is Fibonacci, add a draw-end hook that
-      // keeps only the first two anchor points so the retracement is
-      // limited to the span between them.
-      if (tool === 'fibonacciLine') {
-        callbacks.onDrawEnd = (event: any) => {
-          const ov = event.overlay;
-          if (ov.points && ov.points.length > 2) {
-            ov.points = ov.points.slice(0, 2);
-            this.chart?.overrideOverlay({ id: ov.id, points: ov.points });
+    // common callbacks for every overlay
+    const callbacks: any = {
+      onRightClick: (event: any) => {
+        const id = event.overlay.id;
+        this.chart?.removeOverlay({ id });
+        this.overlayIds = this.overlayIds.filter(x => x !== id);
+        return true;
+      },
+      onMouseEnter: (event: any) => {
+        this.chart?.overrideOverlay({
+          id: event.overlay.id,
+          styles: {
+            line: { color: '#ffb74d', size: 2 },
+            text: { backgroundColor: '#ffb74d' }
           }
-        };
+        });
+      },
+      onMouseLeave: (event: any) => {
+        this.chart?.overrideOverlay({
+          id: event.overlay.id,
+          styles: {
+            line: { color: baseStyle.color, size: baseStyle.size },
+            text: { backgroundColor: baseStyle.color }
+          }
+        });
       }
+    };
 
-      // build overlay configuration; rectangle needs custom point figures
-      let overlayConfig: any;
-      if (tool === 'rectangle') {
-        overlayConfig = {
-          name: 'rectangle',
-          totalStep: 2,
-          needDefaultPointFigure: true,
-          needDefaultXAxisFigure: true,
-          needDefaultYAxisFigure: true,
-          createPointFigures: ({ coordinates }: { coordinates: any[] }) => {
-            if (coordinates.length === 2) {
-              const p1 = coordinates[0];
-              const p2 = coordinates[1];
-              return [
-                {
-                  type: 'line',
-                  attrs: { coordinates: [{ x: p1.x, y: p1.y }, { x: p2.x, y: p1.y }] }
-                },
-                {
-                  type: 'line',
-                  attrs: { coordinates: [{ x: p2.x, y: p1.y }, { x: p2.x, y: p2.y }] }
-                },
-                {
-                  type: 'line',
-                  attrs: { coordinates: [{ x: p2.x, y: p2.y }, { x: p1.x, y: p2.y }] }
-                },
-                {
-                  type: 'line',
-                  attrs: { coordinates: [{ x: p1.x, y: p2.y }, { x: p1.x, y: p1.y }] }
-                }
-              ];
-            }
-            return [];
-          },
-          styles: { line: { color: baseStyle.color, size: baseStyle.size } },
-          ...callbacks
-        };
-      } else {
-        overlayConfig = {
-          name: tool,
-          styles: { line: { color: baseStyle.color, size: baseStyle.size } },
-          ...callbacks
-        };
+    // when the drawing completes we need to record the id and possibly
+    // restart another overlay
+    callbacks.onDrawEnd = (event: any) => {
+      const id = event.overlay.id;
+      // remove from pending list (might have been cancelled already)
+      this.pendingOverlayIds = this.pendingOverlayIds.filter(x => x !== id);
+      // add to history for undo/clear
+      if (id) {
+        this.overlayIds.push(id);
+        this.overlayTimeframe[id] = this._timeframe;
       }
+      // if tool still active, start another overlay
+      if (this.activeDrawingTool === tool) {
+        // small delay to avoid recursion inside event handler
+        setTimeout(() => this.startDrawing(tool), 0);
+      }
+    };
 
-      // createOverlay returns an id (or array of ids) immediately
-      const created = this.chart.createOverlay(overlayConfig);
-
-      // store id(s) for undo
-      if (created) {
-        if (Array.isArray(created)) {
-          this.overlayIds.push(...(created.filter(Boolean) as string[]));
-        } else {
-          this.overlayIds.push(created as string);
+    // special handling for fibonacci to cap points
+    if (tool === 'fibonacciLine') {
+      const orig = callbacks.onDrawEnd;
+      callbacks.onDrawEnd = (event: any) => {
+        const ov = event.overlay;
+        if (ov.points && ov.points.length > 2) {
+          ov.points = ov.points.slice(0, 2);
+          this.chart?.overrideOverlay({ id: ov.id, points: ov.points });
         }
+        orig(event);
+      };
+    }
+
+    // construct overlay configuration; rectangle is custom
+    let overlayConfig: any;
+    if (tool === 'rectangle') {
+      overlayConfig = {
+        name: 'rectangle',
+        totalStep: 2,
+        needDefaultPointFigure: true,
+        needDefaultXAxisFigure: true,
+        needDefaultYAxisFigure: true,
+        createPointFigures: ({ coordinates }: { coordinates: any[] }) => {
+          if (coordinates.length === 2) {
+            const p1 = coordinates[0];
+            const p2 = coordinates[1];
+            return [
+              {
+                type: 'line',
+                attrs: { coordinates: [{ x: p1.x, y: p1.y }, { x: p2.x, y: p1.y }] }
+              },
+              {
+                type: 'line',
+                attrs: { coordinates: [{ x: p2.x, y: p1.y }, { x: p2.x, y: p2.y }] }
+              },
+              {
+                type: 'line',
+                attrs: { coordinates: [{ x: p2.x, y: p2.y }, { x: p1.x, y: p2.y }] }
+              },
+              {
+                type: 'line',
+                attrs: { coordinates: [{ x: p1.x, y: p2.y }, { x: p1.x, y: p1.y }] }
+              }
+            ];
+          }
+          return [];
+        },
+        styles: { line: { color: baseStyle.color, size: baseStyle.size } },
+        ...callbacks
+      };
+    } else {
+      overlayConfig = {
+        name: tool,
+        styles: { line: { color: baseStyle.color, size: baseStyle.size } },
+        ...callbacks
+      };
+    }
+
+    // start the overlay and remember the id(s) so we can cancel later if needed
+    const created = this.chart.createOverlay(overlayConfig);
+    const addPending = (id: string) => {
+      if (id) this.pendingOverlayIds.push(id);
+    };
+    if (created) {
+      if (Array.isArray(created)) {
+        (created.filter(Boolean) as string[]).forEach(addPending);
+      } else {
+        addPending(created as string);
       }
     }
-    this.cdr.detectChanges();
   }
 
   /**
