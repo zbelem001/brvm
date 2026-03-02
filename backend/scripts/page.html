@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/ dc: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ og: http://ogp.me/ns# rdfs: http://www.w3.org/2000/01/rdf-schema# sioc: http://rdfs.org/sioc/ns# sioct: http://rdfs.org/sioc/types# skos: http://www.w3.org/2004/02/skos/core# xsd: http://www.w3.org/2001/XMLSchema#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="https://www.brvm.org/sites/all/themes/custom/brvm/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="canonical" href="https://www.brvm.org/fr" />
+<link rel="shortlink" href="https://www.brvm.org/fr" />
+  <title>BRVM - Bourse Régionale des Valeurs Mobilières |</title>
+  <style>
+@import url("https://www.brvm.org/modules/system/system.base.css?t8t0gy");
+</style>
+<style>
+@import url("https://www.brvm.org/sites/all/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.core.min.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.theme.min.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/views_slideshow/views_slideshow.css?t8t0gy");
+</style>
+<style>
+@import url("https://www.brvm.org/sites/all/modules/contrib/simplenews/simplenews.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/google_chart_tools/analytics_dashboard/analytics_dashboard.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/custom/brvm_prestige/css/brvm_prestige.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/colorbox_node/colorbox_node.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/date/date_api/date.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/date/date_popup/themes/datepicker.1.7.css?t8t0gy");
+@import url("https://www.brvm.org/modules/field/theme/field.css?t8t0gy");
+@import url("https://www.brvm.org/modules/node/node.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/extlink/extlink.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/views/css/views.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/ckeditor/css/ckeditor.css?t8t0gy");
+</style>
+<style>
+@import url("https://www.brvm.org/sites/all/modules/contrib/colorbox/styles/stockholmsyndrome/colorbox_style.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/ctools/css/ctools.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/ctools/css/modal.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/modal_forms/css/modal_forms_popup.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/panels/css/panels.css?t8t0gy");
+</style>
+<link type="text/css" rel="stylesheet" href="https://www.brvm.org/sites/all/modules/contrib/popup/popup.css?t8t0gy" media="all" />
+<style>
+@import url("https://www.brvm.org/sites/all/modules/contrib/views_ticker/views.ticker.scroller.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/panels/plugins/layouts/onecol/onecol.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/modules/contrib/views_slideshow/contrib/views_slideshow_cycle/views_slideshow_cycle.css?t8t0gy");
+@import url("https://www.brvm.org/modules/locale/locale.css?t8t0gy");
+</style>
+<style>
+@import url("https://www.brvm.org/sites/all/themes/custom/brvm/css/fakeloader.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/themes/custom/brvm/css/jOrgChart.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/themes/custom/brvm/css/owl.carousel.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/themes/custom/brvm/css/theme.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/themes/custom/brvm/css/responsive.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/themes/custom/brvm/css/slicknav.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/themes/custom/brvm/bootstrap/css/bootstrap.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/themes/custom/brvm/bootstrap/css/bootstrap-theme.min.css?t8t0gy");
+@import url("https://www.brvm.org/sites/all/themes/custom/brvm/css/hack.css?t8t0gy");
+</style>
+	<!-- Google Tag Manager -->
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5KG3JZFM');</script>
+
+<!-- End Google Tag Manager -->
+  <!-- HTML5 element support for IE6-8 -->
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script src="https://www.brvm.org/sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js?v=1.7.2"></script>
+<script src="https://www.brvm.org/misc/jquery-extend-3.4.0.js?v=1.7.2"></script>
+<script src="https://www.brvm.org/misc/jquery-html-prefilter-3.5.0-backport.js?v=1.7.2"></script>
+<script src="https://www.brvm.org/misc/jquery.once.js?v=1.2"></script>
+<script src="https://www.brvm.org/misc/drupal.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.core.min.js?v=1.10.2"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js?v=67fb34f6a866c40d0570"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/jquery_update/replace/jquery.form/4/jquery.form.min.js?v=4.2.1"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/views_slideshow/js/views_slideshow.js?v=1.0"></script>
+<script src="https://www.brvm.org/misc/ajax.js?v=7.82"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/jquery_update/js/jquery_update.js?v=0.0.1"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/extlink/extlink.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/default/files/languages/fr_2recPpnuB1QbOLG6vjGYqxEo3aIq3fgzkGfdQ4H5YxM.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/libraries/colorbox/jquery.colorbox-min.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/colorbox/js/colorbox.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/colorbox/styles/stockholmsyndrome/colorbox_style.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/colorbox/js/colorbox_load.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/colorbox/js/colorbox_inline.js?t8t0gy"></script>
+<script src="https://www.google.com/jsapi"></script>
+<script src="https://www.brvm.org/sites/all/themes/contrib/bootstrap/js/misc/_progress.js?v=7.82"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/ctools/js/modal.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/modal_forms/js/modal_forms_popup.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/popup/popup.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/modules/custom/splash/splash.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/libraries/jstorage/jstorage.min.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/views_ticker/js/jquery.liscroller.js?t8t0gy"></script>
+<script>(function($) { Drupal.behaviors.views_ticker_liScroll = { attach: function (context) { $("#views-ticker-liScroll-tickers", context).liScroll({pauseOnMouse: false, travelocity:0.07, direction: "left"}); } };})(jQuery);</script>
+<script src="https://www.brvm.org/sites/all/libraries/jquery.cycle/jquery.cycle.all.min.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/libraries/json2/json2.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/views_slideshow/contrib/views_slideshow_cycle/js/views_slideshow_cycle.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/google_analytics/googleanalytics.js?t8t0gy"></script>
+<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-20363277-35", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");</script>
+<script src="https://www.brvm.org/sites/all/modules/contrib/colorbox_node/colorbox_node.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/themes/custom/brvm/js/owl.carousel.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/themes/custom/brvm/js/fakeloader.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/themes/custom/brvm/js/jquery.slicknav.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/themes/custom/brvm/js/wow.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/themes/custom/brvm/js/jquery.slimscroll.min.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/themes/custom/brvm/js/brvm.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/themes/custom/brvm/js/jOrgChart.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/themes/contrib/bootstrap/js/modules/ctools/js/modal.js?t8t0gy"></script>
+<script src="https://www.brvm.org/sites/all/themes/contrib/bootstrap/js/misc/ajax.js?t8t0gy"></script>
+<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"fr\/","ajaxPageState":{"theme":"brvm","theme_token":"9vP75YzvxzUBdV0PY3UMPGPjBOpqZxEy9zMcsVzsACM","jquery_version":"1.7","js":{"sites\/all\/themes\/contrib\/bootstrap\/js\/bootstrap.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/jquery\/1.7\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.core.min.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/external\/jquery.cookie.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/jquery.form\/4\/jquery.form.min.js":1,"sites\/all\/modules\/contrib\/views_slideshow\/js\/views_slideshow.js":1,"misc\/ajax.js":1,"sites\/all\/modules\/contrib\/jquery_update\/js\/jquery_update.js":1,"sites\/all\/modules\/contrib\/extlink\/extlink.js":1,"public:\/\/languages\/fr_2recPpnuB1QbOLG6vjGYqxEo3aIq3fgzkGfdQ4H5YxM.js":1,"sites\/all\/libraries\/colorbox\/jquery.colorbox-min.js":1,"sites\/all\/modules\/contrib\/colorbox\/js\/colorbox.js":1,"sites\/all\/modules\/contrib\/colorbox\/styles\/stockholmsyndrome\/colorbox_style.js":1,"sites\/all\/modules\/contrib\/colorbox\/js\/colorbox_load.js":1,"sites\/all\/modules\/contrib\/colorbox\/js\/colorbox_inline.js":1,"https:\/\/www.google.com\/jsapi":1,"sites\/all\/themes\/contrib\/bootstrap\/js\/misc\/_progress.js":1,"sites\/all\/modules\/contrib\/ctools\/js\/modal.js":1,"sites\/all\/modules\/contrib\/modal_forms\/js\/modal_forms_popup.js":1,"sites\/all\/modules\/contrib\/popup\/popup.js":1,"sites\/all\/modules\/custom\/splash\/splash.js":1,"sites\/all\/libraries\/jstorage\/jstorage.min.js":1,"sites\/all\/modules\/contrib\/views_ticker\/js\/jquery.liscroller.js":1,"0":1,"sites\/all\/libraries\/jquery.cycle\/jquery.cycle.all.min.js":1,"sites\/all\/libraries\/json2\/json2.js":1,"sites\/all\/modules\/contrib\/views_slideshow\/contrib\/views_slideshow_cycle\/js\/views_slideshow_cycle.js":1,"sites\/all\/modules\/contrib\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/contrib\/colorbox_node\/colorbox_node.js":1,"sites\/all\/themes\/custom\/brvm\/js\/owl.carousel.js":1,"sites\/all\/themes\/custom\/brvm\/js\/fakeloader.js":1,"sites\/all\/themes\/custom\/brvm\/js\/jquery.slicknav.js":1,"sites\/all\/themes\/custom\/brvm\/js\/wow.js":1,"sites\/all\/themes\/custom\/brvm\/js\/jquery.slimscroll.min.js":1,"sites\/all\/themes\/custom\/brvm\/js\/brvm.js":1,"sites\/all\/themes\/custom\/brvm\/js\/jOrgChart.js":1,"sites\/all\/themes\/contrib\/bootstrap\/js\/modules\/ctools\/js\/modal.js":1,"sites\/all\/themes\/contrib\/bootstrap\/js\/misc\/ajax.js":1},"css":{"modules\/system\/system.base.css":1,"misc\/ui\/jquery.ui.core.css":1,"misc\/ui\/jquery.ui.theme.css":1,"sites\/all\/modules\/contrib\/views_slideshow\/views_slideshow.css":1,"sites\/all\/modules\/contrib\/simplenews\/simplenews.css":1,"sites\/all\/modules\/contrib\/google_chart_tools\/analytics_dashboard\/analytics_dashboard.css":1,"sites\/all\/modules\/custom\/brvm_prestige\/css\/brvm_prestige.css":1,"sites\/all\/modules\/contrib\/colorbox_node\/colorbox_node.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"sites\/all\/modules\/contrib\/extlink\/extlink.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/contrib\/colorbox\/styles\/stockholmsyndrome\/colorbox_style.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/modal.css":1,"sites\/all\/modules\/contrib\/modal_forms\/css\/modal_forms_popup.css":1,"sites\/all\/modules\/contrib\/panels\/css\/panels.css":1,"sites\/all\/modules\/contrib\/popup\/popup.css":1,"sites\/all\/modules\/contrib\/views_ticker\/views.ticker.scroller.css":1,"sites\/all\/modules\/contrib\/panels\/plugins\/layouts\/onecol\/onecol.css":1,"sites\/all\/modules\/contrib\/views_slideshow\/contrib\/views_slideshow_cycle\/views_slideshow_cycle.css":1,"modules\/locale\/locale.css":1,"sites\/all\/themes\/custom\/brvm\/css\/fakeloader.css":1,"sites\/all\/themes\/custom\/brvm\/css\/jOrgChart.css":1,"sites\/all\/themes\/custom\/brvm\/css\/owl.carousel.css":1,"sites\/all\/themes\/custom\/brvm\/css\/owl.owl.theme.css":1,"sites\/all\/themes\/custom\/brvm\/css\/theme.css":1,"sites\/all\/themes\/custom\/brvm\/css\/responsive.css":1,"sites\/all\/themes\/custom\/brvm\/css\/slicknav.css":1,"sites\/all\/themes\/custom\/brvm\/bootstrap\/css\/bootstrap.css":1,"sites\/all\/themes\/custom\/brvm\/bootstrap\/css\/bootstrap-theme.min.css":1,"sites\/all\/themes\/custom\/brvm\/css\/hack.css":1}},"colorbox":{"transition":"fade","speed":"350","opacity":"0.85","slideshow":false,"slideshowAuto":true,"slideshowSpeed":"2500","slideshowStart":"start slideshow","slideshowStop":"stop slideshow","current":"{current} of {total}","previous":"\u00ab Prev","next":"Next \u00bb","close":"Close","overlayClose":true,"returnFocus":true,"maxWidth":"98%","maxHeight":"98%","initialWidth":"300","initialHeight":"250","fixed":true,"scrolling":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"CToolsModal":{"loadingText":"En cours de chargement...","closeText":"Close Window","closeImage":"\u003Cimg typeof=\u0022foaf:Image\u0022 class=\u0022img-responsive\u0022 src=\u0022https:\/\/www.brvm.org\/sites\/all\/modules\/contrib\/ctools\/images\/icon-close-window.png\u0022 alt=\u0022Close window\u0022 title=\u0022Close window\u0022 \/\u003E","throbber":"\u003Cimg typeof=\u0022foaf:Image\u0022 class=\u0022img-responsive\u0022 src=\u0022https:\/\/www.brvm.org\/sites\/all\/modules\/contrib\/ctools\/images\/throbber.gif\u0022 alt=\u0022En cours de chargement\u0022 title=\u0022En cours de chargement...\u0022 \/\u003E"},"modal-popup-small":{"modalSize":{"type":"fixed","width":300,"height":300},"modalOptions":{"opacity":0.85,"background":"#000"},"animation":"fadeIn","modalTheme":"ModalFormsPopup","throbber":"\u003Cimg typeof=\u0022foaf:Image\u0022 class=\u0022img-responsive\u0022 src=\u0022https:\/\/www.brvm.org\/sites\/all\/modules\/contrib\/modal_forms\/images\/loading_animation.gif\u0022 alt=\u0022En cours de chargement...\u0022 title=\u0022En cours de chargement\u0022 \/\u003E","closeText":"Fermer"},"modal-popup-medium":{"modalSize":{"type":"fixed","width":550,"height":450},"modalOptions":{"opacity":0.85,"background":"#000"},"animation":"fadeIn","modalTheme":"ModalFormsPopup","throbber":"\u003Cimg typeof=\u0022foaf:Image\u0022 class=\u0022img-responsive\u0022 src=\u0022https:\/\/www.brvm.org\/sites\/all\/modules\/contrib\/modal_forms\/images\/loading_animation.gif\u0022 alt=\u0022En cours de chargement...\u0022 title=\u0022En cours de chargement\u0022 \/\u003E","closeText":"Fermer"},"modal-popup-large":{"modalSize":{"type":"scale","width":0.8,"height":0.8},"modalOptions":{"opacity":0.85,"background":"#000"},"animation":"fadeIn","modalTheme":"ModalFormsPopup","throbber":"\u003Cimg typeof=\u0022foaf:Image\u0022 class=\u0022img-responsive\u0022 src=\u0022https:\/\/www.brvm.org\/sites\/all\/modules\/contrib\/modal_forms\/images\/loading_animation.gif\u0022 alt=\u0022En cours de chargement...\u0022 title=\u0022En cours de chargement\u0022 \/\u003E","closeText":"Fermer"},"popup":{"effects":{"show":{"default":"this.body.show();","fade":"\n        if (this.opacity){\n          this.body.fadeTo(\u0027medium\u0027,this.opacity);\n        }else{\n          this.body.fadeIn(\u0027medium\u0027);\n        }","slide-down":"this.body.slideDown(\u0027medium\u0027)","slide-down-fade":"\n        this.body.animate(\n          {\n            height:\u0027show\u0027,\n            opacity:(this.opacity ? this.opacity : \u0027show\u0027)\n          }, \u0027medium\u0027\n        );"},"hide":{"default":"this.body.hide();","fade":"this.body.fadeOut(\u0027medium\u0027);","slide-down":"this.body.slideUp(\u0027medium\u0027);","slide-down-fade":"\n        this.body.animate(\n          {\n            height:\u0027hide\u0027,\n            opacity:\u0027hide\u0027\n          }, \u0027medium\u0027\n        );"}},"linger":"250","delay":"0"},"splash":{"splash_splash_text":"La BRVM est heureuse de vous faire d\u00e9couvrir son nouveau site. Prenez plaisir \u00e0 parcourir ce site et n\u0027h\u00e9sitez pas \u00e0 le partager, notamment via les r\u00e9seaux sociaux."},"better_exposed_filters":{"views":{"tickers":{"displays":{"block":{"filters":[]}}},"sliderhome":{"displays":{"block":{"filters":[]}}}}},"viewsSlideshow":{"sliderhome-block_1":{"methods":{"goToSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"nextSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"pause":["viewsSlideshowControls","viewsSlideshowCycle"],"play":["viewsSlideshowControls","viewsSlideshowCycle"],"previousSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"transitionBegin":["viewsSlideshowPager","viewsSlideshowSlideCounter"],"transitionEnd":[]},"paused":0}},"viewsSlideshowPager":{"sliderhome-block_1":{"top":{"type":"viewsSlideshowPagerFields","master_pager":"0"}}},"viewsSlideshowPagerFields":{"sliderhome-block_1":{"top":{"activatePauseOnHover":0}}},"viewsSlideshowCycle":{"#views_slideshow_cycle_main_sliderhome-block_1":{"num_divs":14,"id_prefix":"#views_slideshow_cycle_main_","div_prefix":"#views_slideshow_cycle_div_","vss_id":"sliderhome-block_1","effect":"scrollRight","transition_advanced":1,"timeout":5000,"speed":700,"delay":0,"sync":1,"random":0,"pause":1,"pause_on_click":0,"play_on_hover":0,"action_advanced":0,"start_paused":0,"remember_slide":0,"remember_slide_days":1,"pause_in_middle":0,"pause_when_hidden":0,"pause_when_hidden_type":"full","amount_allowed_visible":"","nowrap":0,"pause_after_slideshow":0,"fixed_height":1,"items_per_slide":1,"wait_for_image_load":1,"wait_for_image_load_timeout":3000,"cleartype":0,"cleartypenobg":0,"advanced_options":"{}","advanced_options_choices":0,"advanced_options_entry":""}},"urlIsAjaxTrusted":{"\/":true},"extlink":{"extTarget":"_blank","extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":0,"extAlertText":"This link will take you to an external web site.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":1},"colorbox_node":{"width":"600px","height":"600px"},"bootstrap":{"anchorsFix":1,"anchorsSmoothScrolling":1,"formHasError":1,"popoverEnabled":1,"popoverOptions":{"animation":1,"html":0,"placement":"right","selector":"","trigger":"click","triggerAutoclose":1,"title":"","content":"","delay":0,"container":"body"},"tooltipEnabled":1,"tooltipOptions":{"animation":1,"html":0,"placement":"auto left","selector":"","trigger":"hover focus","delay":0,"container":"body"}}});</script>
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3KP9HP3W4R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3KP9HP3W4R');
+</script>
+</head>
+<body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-page i18n-fr" >
+	<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src=https://www.googletagmanager.com/ns.html?id=GTM-5KG3JZFM
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+        <!--div class="fakeloader"></div-->
+    <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Aller au contenu principal</a>
+  </div>
+    <div id="fakeLoader" class="fakeLoader"></div>
+<div class="page">
+  <!-- TOP BAR-->
+  <div class="top_bar">
+    <div class="container">
+      <div class="col-md-12">
+        <span class="user-login"><a href="/fr/user/login">Se connecter</a></span>
+          <div class="region region-box-header">
+    <section id="block-block-7" class="block block-block clearfix">
+
+      
+  <p><a href="/fr/investisseurs/portefeuille">Portefeuille boursier</a></p>
+
+</section>
+<section id="block-locale-language" class="block block-locale clearfix" align="right">
+
+      
+  <ul class="language-switcher-locale-url"><li class="fr first active"><a href="/fr" class="language-link active" xml:lang="fr">FR</a></li>
+<li class="en"><a href="/en" class="language-link" xml:lang="en">EN</a></li>
+<li class="pt-pt last"><a href="/pt" class="language-link" xml:lang="pt-pt">PO</a></li>
+</ul>
+</section>
+  </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION HEADER-->
+  <div class="box_navi">
+    <div class="container">
+      <div class="row navi">
+        <div class="col-md-2">
+                      <a class="logo navbar-btn pull-left" href="/fr" title="Accueil">
+              <img src="https://www.brvm.org/sites/all/themes/custom/brvm/logo.png" alt="Accueil" />
+            </a>
+                  </div>
+        <div class="col-md-10 col-xs-12 pull-right">
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="seance">
+                <p class="header-seance">Samedi, 21 février, 2026 - 17:33</p>
+                <div class="block-seance">
+                                      <div class="seance-fermee">
+                      Séance fermée                    </div>
+                                                      <div class="items-seance ferme">
+                      <div class="region region-box-activities">
+    <section id="slide-seance" class="block block-tools clearfix">
+
+      
+  <div class="item"><span>ABJC</span>&nbsp;<span>3 790</span>&nbsp;<span>7,37%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>BICB</span>&nbsp;<span>4 990</span>&nbsp;<span>0,30%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>BICC</span>&nbsp;<span>23 000</span>&nbsp;<span>6,95%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>BNBC</span>&nbsp;<span>1 555</span>&nbsp;<span>-1,58%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>BOAB</span>&nbsp;<span>6 870</span>&nbsp;<span>-0,29%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>BOABF</span>&nbsp;<span>4 655</span>&nbsp;<span>-0,11%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>BOAC</span>&nbsp;<span>7 800</span>&nbsp;<span>4,00%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>BOAM</span>&nbsp;<span>4 450</span>&nbsp;<span>0,22%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>BOAN</span>&nbsp;<span>2 600</span>&nbsp;<span>-0,77%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>BOAS</span>&nbsp;<span>6 200</span>&nbsp;<span>1,16%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>CABC</span>&nbsp;<span>3 560</span>&nbsp;<span>7,39%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>CBIBF</span>&nbsp;<span>13 000</span>&nbsp;<span>0,78%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>CFAC</span>&nbsp;<span>1 650</span>&nbsp;<span>2,52%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>CIEC</span>&nbsp;<span>2 920</span>&nbsp;<span>3,34%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>ECOC</span>&nbsp;<span>16 900</span>&nbsp;<span>4,00%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>ETIT</span>&nbsp;<span>34</span>&nbsp;<span>3,03%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>FTSC</span>&nbsp;<span>2 250</span>&nbsp;<span>-1,11%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>LNBB</span>&nbsp;<span>3 885</span>&nbsp;<span>-0,51%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>NEIC</span>&nbsp;<span>1 515</span>&nbsp;<span>-0,33%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>NSBC</span>&nbsp;<span>13 980</span>&nbsp;<span>0,14%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>NTLC</span>&nbsp;<span>12 400</span>&nbsp;<span>3,22%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>ONTBF</span>&nbsp;<span>2 820</span>&nbsp;<span>-3,11%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>ORAC</span>&nbsp;<span>15 000</span>&nbsp;<span>2,77%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>ORGT</span>&nbsp;<span>3 210</span>&nbsp;<span>3,45%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>PALC</span>&nbsp;<span>9 005</span>&nbsp;<span>0,00%</span>&nbsp;<span class="icone-seance nul"></span></div><div class="item"><span>PRSC</span>&nbsp;<span>4 650</span>&nbsp;<span>3,33%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>SAFC</span>&nbsp;<span>4 970</span>&nbsp;<span>7,46%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>SCRC</span>&nbsp;<span>1 565</span>&nbsp;<span>-2,51%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>SDCC</span>&nbsp;<span>6 450</span>&nbsp;<span>2,46%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>SDSC</span>&nbsp;<span>2 100</span>&nbsp;<span>-0,48%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>SEMC</span>&nbsp;<span>2 675</span>&nbsp;<span>3,31%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>SGBC</span>&nbsp;<span>33 300</span>&nbsp;<span>2,45%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>SHEC</span>&nbsp;<span>1 775</span>&nbsp;<span>0,00%</span>&nbsp;<span class="icone-seance nul"></span></div><div class="item"><span>SIBC</span>&nbsp;<span>6 800</span>&nbsp;<span>2,10%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>SICC</span>&nbsp;<span>3 610</span>&nbsp;<span>0,69%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>SIVC</span>&nbsp;<span>2 775</span>&nbsp;<span>3,53%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>SLBC</span>&nbsp;<span>35 540</span>&nbsp;<span>7,49%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>SMBC</span>&nbsp;<span>13 750</span>&nbsp;<span>3,67%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>SNTS</span>&nbsp;<span>29 100</span>&nbsp;<span>2,84%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>SOGC</span>&nbsp;<span>8 395</span>&nbsp;<span>-1,13%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>SPHC</span>&nbsp;<span>7 825</span>&nbsp;<span>0,00%</span>&nbsp;<span class="icone-seance nul"></span></div><div class="item"><span>STAC</span>&nbsp;<span>1 960</span>&nbsp;<span>7,40%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>STBC</span>&nbsp;<span>21 400</span>&nbsp;<span>0,00%</span>&nbsp;<span class="icone-seance nul"></span></div><div class="item"><span>TTLC</span>&nbsp;<span>2 820</span>&nbsp;<span>4,83%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>TTLS</span>&nbsp;<span>2 930</span>&nbsp;<span>1,91%</span>&nbsp;<span class="icone-seance good"></span></div><div class="item"><span>UNLC</span>&nbsp;<span>74 505</span>&nbsp;<span>-6,86%</span>&nbsp;<span class="icone-seance bad"></span></div><div class="item"><span>UNXC</span>&nbsp;<span>2 305</span>&nbsp;<span>-2,55%</span>&nbsp;<span class="icone-seance bad"></span></div>
+</section>
+  </div>
+                  </div>
+                </div><!-- End seance -->
+              </div>
+            </div>
+            <div class="form-header">
+              <div class="col-md-4">
+                  <div class="region region-box-news">
+    <section id="block-simplenews-1" class="block block-simplenews clearfix">
+
+      
+    
+      <form class="simplenews-subscribe" action="/" method="post" id="simplenews-block-form-1" accept-charset="UTF-8"><div><div class="form-item form-item-mail form-type-textfield form-group"> <label class="control-label" for="edit-mail">Courriel <span class="form-required" title="Ce champ est requis.">*</span></label>
+<input class="form-control form-text required" type="text" id="edit-mail" name="mail" value="" size="20" maxlength="128" /></div><button type="submit" id="edit-submit" name="op" value="S&#039;abonner" class="btn btn-default form-submit">S'abonner</button>
+<input type="hidden" name="form_build_id" value="form-Nnhbj5KIqd_HPZb4Ckx5am6D33Rl5fjbJqwln3Xnyes" />
+<input type="hidden" name="form_id" value="simplenews_block_form_1" />
+</div></form>  
+      <div class="issues-link"><a href="/fr/newsletter/brvm-bourse-regionale-des-valeurs-mobilieres-newsletter">Publications précédentes</a></div>
+  
+  
+      <a href="/fr/taxonomy/term/1/feed" class="feed-icon" title="S&#039;abonner à flux BRVM - Bourse Régionale des Valeurs Mobilières newsletter"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/misc/feed.png" width="16" height="16" alt="S&#039;abonner à flux BRVM - Bourse Régionale des Valeurs Mobilières newsletter" /></a>  
+</section>
+  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="region region-box-search">
+    <section id="block-search-form" class="block block-search clearfix">
+
+      
+  <form class="form-search content-search" action="/" method="post" id="search-block-form" accept-charset="UTF-8"><div><div>
+      <h2 class="element-invisible">Formulaire de recherche</h2>
+    <div class="input-group"><input title="Indiquer les termes à rechercher" placeholder="Rechercher" class="form-control form-text" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" /><span class="input-group-btn"><button type="submit" class="btn btn-primary"><span class="icon glyphicon glyphicon-search" aria-hidden="true"></span>
+</button></span></div><div class="form-actions form-wrapper form-group" id="edit-actions"><button class="element-invisible btn btn-primary form-submit" type="submit" id="edit-submit--2" name="op" value="Rechercher">Rechercher</button>
+</div><input type="hidden" name="form_build_id" value="form-UIyfoXdW2VuVICysJIvqjAl8NTqAFy7LoFuU6F21Vsw" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>
+</section>
+  </div>
+              </div>
+              <div class="col-md-2">
+                  <div class="region region-box-social">
+    <section id="block-menu-menu-social-menu" class="block block-menu clearfix">
+
+      
+  <ul class="menu nav"><li class="first leaf"><a href="https://www.facebook.com/BRVMUEMOA" target="_blank">Facebook</a></li>
+<li class="leaf"><a href="https://twitter.com/BRVM_UEMOA" target="_blank">Twitter</a></li>
+<li class="leaf"><a href="https://www.youtube.com/channel/UC6l4ZBi_sT_sS7dliZA9lyQ" target="_blank">Youtube</a></li>
+<li class="last leaf"><a href="https://www.linkedin.com/in/bourse-r%C3%A9gionale-des-valeurs-mobili%C3%A8res-b79a44113?trk=hp-identity-name" target="_blank">LinkdIn</a></li>
+</ul>
+</section>
+  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <div class="region region-navigation">
+    <section id="block-system-main-menu" class="block block-system block-menu clearfix">
+
+      
+  <ul class="menu nav"><li class="first leaf active-trail active"><a href="/fr" class="homepage-link active-trail active">Accueil</a></li>
+<li class="collapsed"><a href="/fr/historique">A propos</a></li>
+<li class="collapsed"><a href="/fr/intervenants/sgi/tous">Courtiers (SGI)</a></li>
+<li class="collapsed"><a href="/fr/resume">Journée de cotation</a></li>
+<li class="collapsed"><a href="/fr/flux-en-temps-reel">Données et Services</a></li>
+<li class="leaf"><a href="/fr/rapports-societes-cotees">Rapports sociétés cotées</a></li>
+<li class="collapsed"><a href="/fr/emetteurs/type-annonces/convocations-assemblees-generales">Annonces émetteurs</a></li>
+<li class="collapsed"><a href="/fr/bulletins-officiels-de-la-cote">Publications</a></li>
+<li class="last collapsed menu-prestige"><a href="/fr/indice-prestige">BRVM Prestige</a></li>
+</ul>
+</section>
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION SLIDER-->
+  <div class="box_slider">
+    <div class="container">
+      <div class="row slider">
+        <div class="col-md-12 fadeInUp">
+            <div class="region region-brvm-slider">
+    <section id="block-views-sliderhome-block" class="block block-views clearfix">
+
+      
+  <div class="view view-sliderhome view-id-sliderhome view-display-id-block view-dom-id-592c209a091ec6733b5f367791c7063e">
+        
+  
+  
+      <div class="view-content">
+      
+  <div class="skin-default">
+          <div class="views-slideshow-controls-top clearfix">
+        <div id="widget_pager_top_sliderhome-block_1" class="views-slideshow-pager-fields widget_pager widget_pager_top views_slideshow_pager_field">
+  <div id="views_slideshow_pager_field_item_top_sliderhome-block_1_0" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-odd views-row-first" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_0">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-0'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/whatsapp_image_2026-01-30_at_18.59.28.jpeg?itok=5rk0jl4E" width="100" height="59" alt="" />
+<p>La capitalisation boursière du marché des actions de la BRVM s’élève, au 30...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_1" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-even" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_1">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-1'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/siege_brvm_0.jpg?itok=CHsNBrgN" width="100" height="63" alt="" />
+<p>Depuis le 2 janvier 2026, la Bourse Régionale des Valeurs Mobilières (BRVM) a...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_2" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-odd" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_2">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-2'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/brvm-bannire-site-web-02_14.jpg?itok=8MSunCu0" width="100" height="56" alt="" />
+<p><strong>La BRVM clôture l’année 2025 avec une progression remarquable de 25,26 %</strong></p> <p>Malgré...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_3" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-even" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_3">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-3'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/250711_journeesrh-1.jpg?itok=kTx6-q8a" width="100" height="37" alt="" />
+<p>Le Directeur Général de la Bourse Régionale des Valeurs Mobilières (BRVM), Dr Edoh...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_4" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-odd" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_4">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-4'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/250620_capi-12000milliards.jpg?itok=cv7GZC5U" width="100" height="37" alt="" />
+<p>La Bourse Régionale des Valeurs Mobilières (BRVM) a franchi ce vendredi 20 juin...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_5" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-even" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_5">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-5'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/250528_lancement-bmpa.jpg?itok=0S8djlh3" width="100" height="37" alt="" />
+<p>Le mercredi 28 mai 2025, la Côte d’Ivoire a inscrit une nouvelle page...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_6" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-odd" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_6">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-6'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/250513_brvmawards2025.jpg?itok=A0YCcBtV" width="100" height="37" alt="" />
+<p>La BRVM est honorée d’avoir eu, en conférence spéciale, Monsieur Emmanuel Koffi AHOUTOU,...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_7" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-even" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_7">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-7'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/250513_mou-brvm-africa50.jpg?itok=cDQRh9tz" width="100" height="37" alt="" />
+<p><span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;">Abidjan, Côte d'Ivoire, le 13 mai 2025 — Africa50, l'investisseur et</span></span>...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_8" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-odd" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_8">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-8'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/brvmawards.jpg?itok=0EzhiAwJ" width="100" height="37" alt="" />
+<p>La Bourse Régionale des Valeurs Mobilières (BRVM) a procédé ce mardi 29 avril...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_9" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-even" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_9">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-9'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/premierecotationbiic.jpg?itok=lZDJKsXa" width="100" height="37" alt="" />
+<p>La Bourse Régionale des Valeurs Mobilières (BRVM) a officiellement admis à sa cote,...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_10" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-odd" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_10">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-10'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/250397_8mars.jpg?itok=ZKbX8ZGg" width="100" height="37" alt="" />
+<p>La Bourse Régionale des Valeurs Mobilières (BRVM) a célébré ce vendredi 7 mars...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_11" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-even" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_11">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-11'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/250225_bmpa.jpg?itok=9liPwK5U" width="100" height="37" alt="" />
+<p class="rtejustify">La Bourse Régionale des Valeurs Mobilières (BRVM) de l’UEMOA et l’Autorité de...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_12" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-odd" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_12">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-12'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/brvm-bannire-site-web-02_13.jpg?itok=I0idtEC6" width="100" height="32" alt="" />
+<p>La Bourse Régionale des Valeurs Mobilières (BRVM) et le Global Green Growth Institute...</p></a>  </div>
+</div>
+</div>
+<div id="views_slideshow_pager_field_item_top_sliderhome-block_1_13" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-even views-row-last" aria-controls="views_slideshow_cycle_div_sliderhome-block_1_13">
+  <div class="views-field-nothing">
+    <div class="views-content-nothing">
+    <a href='#slideshow-13'><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/thumbnail/public/elite_brvm_lounge.jpg?itok=irdbd3u9" width="100" height="37" alt="" />
+<p>Liste des entreprises admises au programme ELITE BRVM Lounge</p> <table border="0" cellpadding="0" cellspacing="0">...</table></a>  </div>
+</div>
+</div>
+</div>
+      </div>
+    
+    <div id="views_slideshow_cycle_main_sliderhome-block_1" class="views_slideshow_cycle_main views_slideshow_main"><div id="views_slideshow_cycle_teaser_section_sliderhome-block_1" class="views-slideshow-cycle-main-frame views_slideshow_cycle_teaser_section">
+  <div id="views_slideshow_cycle_div_sliderhome-block_1_0" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-1 views-row-first views-row-odd" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_0'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd views-row-first">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/la-brvm-accentue-son-dynamisme-en-ce-debut-dannee">LA BRVM ACCENTUE SON DYNAMISME EN CE DÉBUT D’ANNÉE</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/whatsapp_image_2026-01-30_at_18.59.28.jpeg?itok=LeE-5okb" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p>La capitalisation boursière du marché des actions de la BRVM s’élève, au 30 janvier 2026, à 14 069...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/la-brvm-accentue-son-dynamisme-en-ce-debut-dannee">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2029-12-31T00:00:00+00:00">Lundi, 31 décembre, 2029</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_1" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-2 views_slideshow_cycle_hidden views-row-even" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_1'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/le-bulletin-officiel-de-la-cote-de-la-brvm-des-evolutions-majeures-pour-une-0">LE BULLETIN OFFICIEL DE LA COTE DE LA BRVM : DES EVOLUTIONS MAJEURES POUR UNE MEILLEURE LISIBILITE DU MARCHE</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/siege_brvm_0.jpg?itok=uUzqyUls" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p>Depuis le 2 janvier 2026, la Bourse Régionale des Valeurs Mobilières (BRVM) a introduit plusieurs évolutions structurantes dans...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/le-bulletin-officiel-de-la-cote-de-la-brvm-des-evolutions-majeures-pour-une-0">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2029-12-31T00:00:00+00:00">Lundi, 31 décembre, 2029</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_2" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-3 views_slideshow_cycle_hidden views-row-odd" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_2'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/2025-la-consolidation-quinquennale-9915-de-progression-en-5-ans">2025 : LA CONSOLIDATION QUINQUENNALE, 99,15 % de progression en 5 ans</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/brvm-bannire-site-web-02_14.jpg?itok=BBrESCCN" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p><strong>La BRVM clôture l’année 2025 avec une progression remarquable de 25,26 %</strong></p> <p>Malgré un contexte économique mondial toujours...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/2025-la-consolidation-quinquennale-9915-de-progression-en-5-ans">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2028-12-31T00:00:00+00:00">Dimanche, 31 décembre, 2028</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_3" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-4 views_slideshow_cycle_hidden views-row-even" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_3'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/journee-nationale-des-ressources-humaines-2025-le-dg-de-la-brvm-partage-sa">JOURNEE NATIONALE DES RESSOURCES HUMAINES 2025: LE DG DE LA BRVM PARTAGE SA VISION SUR L&#039;AGILITE DU CAPITAL HUMAIN ET LA GESTION &amp;  LA RETENTION DES TALENTS</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/250711_journeesrh-1.jpg?itok=Ws1JrRC2" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p>Le Directeur Général de la Bourse Régionale des Valeurs Mobilières (BRVM), Dr Edoh Kossi AMENOUNVE a pris part...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/journee-nationale-des-ressources-humaines-2025-le-dg-de-la-brvm-partage-sa">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-07-11T00:00:00+00:00">Samedi, 11 juillet, 2026</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_4" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-5 views_slideshow_cycle_hidden views-row-odd" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_4'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/la-capitalisation-boursiere-de-la-brvm-progresse-de-2000-milliards-fcfa-en-6">LA CAPITALISATION BOURSIERE DE LA BRVM PROGRESSE DE 2000 MILLIARDS FCFA EN 6 MOIS !</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/250620_capi-12000milliards.jpg?itok=IuFcbNZp" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p>La Bourse Régionale des Valeurs Mobilières (BRVM) a franchi ce vendredi 20 juin 2025 une nouvelle étape de...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/la-capitalisation-boursiere-de-la-brvm-progresse-de-2000-milliards-fcfa-en-6">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-06-20T00:00:00+00:00">Samedi, 20 juin, 2026</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_5" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-6 views_slideshow_cycle_hidden views-row-even" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_5'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/premiere-cotation-sur-la-bmpa-ci-un-demarrage-prometteur-pour-le-marche">PREMIERE COTATION SUR LA BMPA CI : UN DEMARRAGE PROMETTEUR POUR LE MARCHE AGRICOLE IVOIRIEN</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/250528_lancement-bmpa.jpg?itok=ogfTtXDj" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p>Le mercredi 28 mai 2025, la Côte d’Ivoire a inscrit une nouvelle page dans l’histoire de son agriculture...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/premiere-cotation-sur-la-bmpa-ci-un-demarrage-prometteur-pour-le-marche">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-05-30T00:00:00+00:00">Samedi, 30 mai, 2026</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_6" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-7 views_slideshow_cycle_hidden views-row-odd" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_6'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/conference-speciale-brvm-awards-2025-la-cote-divoire-et-lexperience">CONFERENCE SPECIALE BRVM AWARDS 2025  : La Côte d’Ivoire et l’Expérience ivoirienne en matière de privatisation à l’honneur lors des BRVM Awards 2025 !</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/250513_brvmawards2025.jpg?itok=Y7Y3b2Ph" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p>La BRVM est honorée d’avoir eu, en conférence spéciale, Monsieur Emmanuel Koffi AHOUTOU, Ministre, Directeur de Cabinet du...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/conference-speciale-brvm-awards-2025-la-cote-divoire-et-lexperience">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-05-14T00:00:00+00:00">Jeudi, 14 mai, 2026</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_7" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-8 views_slideshow_cycle_hidden views-row-even" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_7'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/africa50-et-la-brvm-sassocient-pour-mobiliser-des-capitaux-regionaux-destines">AFRICA50 ET LA BRVM S&#039;ASSOCIENT POUR MOBILISER DES CAPITAUX REGIONAUX DESTINES AU DEVELOPPEMENT D&#039;INFRASTRUCTURES</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/250513_mou-brvm-africa50.jpg?itok=tm3AsC4n" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p><span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;">Abidjan, Côte d'Ivoire, le 13 mai 2025 — Africa50, l'investisseur et gestionnaire d'actifs panafricain dans les</span></span>...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/africa50-et-la-brvm-sassocient-pour-mobiliser-des-capitaux-regionaux-destines">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-05-13T00:00:00+00:00">Mercredi, 13 mai, 2026</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_8" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-9 views_slideshow_cycle_hidden views-row-odd" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_8'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/brvm-awards-cotonou-accueille-la-6e-edition-de-la-celebration-de-lexcellence">BRVM AWARDS : COTONOU ACCUEILLE LA 6E EDITION DE LA CELEBRATION DE L&#039;EXCELLENCE SUR LE MARCHE FINANCIER REGIONAL DE L’UEMOA</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/brvmawards.jpg?itok=O3EtNZiC" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p>La Bourse Régionale des Valeurs Mobilières (BRVM) a procédé ce mardi 29 avril 2025 à Cotonou, à l’ouverture...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/brvm-awards-cotonou-accueille-la-6e-edition-de-la-celebration-de-lexcellence">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-04-29T00:00:00+00:00">Mercredi, 29 avril, 2026</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_9" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-10 views_slideshow_cycle_hidden views-row-even" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_9'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/la-banque-internationale-pour-lindustrie-et-le-commerce-du-benin-biic-admise">LA BANQUE INTERNATIONALE POUR L’INDUSTRIE ET LE COMMERCE DU BENIN (BIIC) ADMISE A LA COTE DE LA BRVM</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/premierecotationbiic.jpg?itok=RgC0cxA8" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p>La Bourse Régionale des Valeurs Mobilières (BRVM) a officiellement admis à sa cote, sur le marché des actions,...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/la-banque-internationale-pour-lindustrie-et-le-commerce-du-benin-biic-admise">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-04-28T00:00:00+00:00">Mardi, 28 avril, 2026</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_10" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-11 views_slideshow_cycle_hidden views-row-odd" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_10'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/ring-bell-gender-equality-la-brvm-celebre-la-journee-internationale-des">RING THE BELL FOR GENDER EQUALITY : LA BRVM A CÉLÉBRÉ LA JOURNÉE INTERNATIONALE DES DROITS DE LA FEMME</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/250397_8mars.jpg?itok=Amf_Ouz4" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p>La Bourse Régionale des Valeurs Mobilières (BRVM) a célébré ce vendredi 7 mars 2025, la Journée Internationale des...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/ring-bell-gender-equality-la-brvm-celebre-la-journee-internationale-des">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-03-07T00:00:00+00:00">Samedi, 7 mars, 2026</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_11" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-12 views_slideshow_cycle_hidden views-row-even" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_11'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/salon-international-de-lagriculture-la-brvm-et-larre-presentent-la-bourse-des">SALON INTERNATIONAL DE L&#039;AGRICULTURE : LA BRVM ET L’ARRE PRESENTENT LA BOURSE DES MATIERES PREMIERES AGRICOLES DE CÔTE D’IVOIRE (BMPA CI) </a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/250225_bmpa.jpg?itok=pEgqFg6i" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p class="rtejustify">La Bourse Régionale des Valeurs Mobilières (BRVM) de l’UEMOA et l’Autorité de Régulation du Système de Récépissés...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/salon-international-de-lagriculture-la-brvm-et-larre-presentent-la-bourse-des">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-02-25T00:00:00+00:00">Mercredi, 25 février, 2026</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_12" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-13 views_slideshow_cycle_hidden views-row-odd" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_12'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/finance-verte-la-brvm-et-le-gggi-unissent-leurs-forces">FINANCE VERTE : LA BRVM ET LE GGGI UNISSENT LEURS FORCES</a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/brvm-bannire-site-web-02_13.jpg?itok=oFN23enu" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p>La Bourse Régionale des Valeurs Mobilières (BRVM) et le Global Green Growth Institute (GGGI) ont procédé, ce jeudi...</p></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/finance-verte-la-brvm-et-le-gggi-unissent-leurs-forces">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-04-22T00:00:00+00:00">Mercredi, 22 avril, 2026</span></div>  </div></div>
+</div>
+<div id="views_slideshow_cycle_div_sliderhome-block_1_13" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-14 views_slideshow_cycle_hidden views-row-last views-row-even" aria-labelledby='views_slideshow_pager_field_item_top_sliderhome-block_1_13'>
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+    
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/fr/mediacentre/actualites/elite-brvm-lounge">ELITE BRVM LOUNGE </a></span>  </div>  
+  <div class="views-field views-field-field-visuel-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-image-actualite">        <div class="field-content"><img typeof="foaf:Image" class="img-responsive" src="https://www.brvm.org/sites/default/files/styles/slidehome/public/elite_brvm_lounge.jpg?itok=xOLqSEEq" width="819" height="297" alt="" /></div>  </div>  
+  <div class="views-field views-field-field-descriptif-slidehome">        <div class="field-content"></div>  </div>  
+  <div class="views-field views-field-field-descriptif-actualite">        <div class="field-content"><p>Liste des entreprises admises au programme ELITE BRVM Lounge</p> <table border="0" cellpadding="0" cellspacing="0" style="width: 824px;" width="1098"><colgroup><col /></colgroup>...</table></div>  </div>  
+  <div class="views-field views-field-view-node">        <span class="field-content"><a href="/fr/mediacentre/actualites/elite-brvm-lounge">Lire plus</a></span>  </div>  
+  <div class="views-field views-field-field-date-d-expiration">    <span class="views-label views-label-field-date-d-expiration">Date d&#039;expiration: </span>    <div class="field-content"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2030-10-22T00:00:00+00:00">Mardi, 22 octobre, 2030</span></div>  </div></div>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>
+</section>
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION CONTENT HOME -->
+  <div class="box_contain">
+    <div class="pre-footer">
+      <div class="block-resultat">
+        <div class="container">
+          <div class="row">
+              <div class="region region-content">
+    <section id="block-views-tickers-block" class="block block-views clearfix">
+
+      
+  <div class="view view-tickers view-id-tickers view-display-id-block view-dom-id-5a7183ceeb08a22c170746333c79ed6c">
+        
+  
+  
+      <div class="view-content">
+      <!-- start scroll -->
+<div class='view view-tickers'><div class='view-content view-content-tickers'><div><ul id='views-ticker-liScroll-tickers'><li class='views-liScroll-item views-liScroll-item-tickers'><span class='views-liScroll-tick-field'>  
+  <div class="views-field views-field-nothing">        <span class="field-content">TPBJ  : Paiement des coupons d’intérêts et / ou remboursement de capital    le <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-03-13T00:00:00+00:00">13 mars 2026</span>,            | </span>  </div></span></li><li class='views-liScroll-item views-liScroll-item-tickers'><span class='views-liScroll-tick-field'>  
+  <div class="views-field views-field-nothing">        <span class="field-content">TPBJ  : Paiement des coupons d’intérêts et / ou remboursement de capital    le <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-03-13T00:00:00+00:00">13 mars 2026</span>,            | </span>  </div></span></li><li class='views-liScroll-item views-liScroll-item-tickers'><span class='views-liScroll-tick-field'>  
+  <div class="views-field views-field-nothing">        <span class="field-content">  : Paiement des coupons d’intérêts et / ou remboursement de capital    le <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-03-06T00:00:00+00:00">6 mars 2026</span>,            | </span>  </div></span></li><li class='views-liScroll-item views-liScroll-item-tickers'><span class='views-liScroll-tick-field'>  
+  <div class="views-field views-field-nothing">        <span class="field-content">  : Paiement des coupons d’intérêts et / ou remboursement de capital    le <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-03-06T00:00:00+00:00">6 mars 2026</span>,            | </span>  </div></span></li><li class='views-liScroll-item views-liScroll-item-tickers'><span class='views-liScroll-tick-field'>  
+  <div class="views-field views-field-nothing">        <span class="field-content">FCTCEPT  : Paiement des coupons d’intérêts et / ou remboursement de capital    le <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-02-27T00:00:00+00:00">27 février 2026</span>,            | </span>  </div></span></li><li class='views-liScroll-item views-liScroll-item-tickers'><span class='views-liScroll-tick-field'>  
+  <div class="views-field views-field-nothing">        <span class="field-content">FCTCEPT  : Paiement des coupons d’intérêts et / ou remboursement de capital    le <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-02-27T00:00:00+00:00">27 février 2026</span>,            | </span>  </div></span></li><li class='views-liScroll-item views-liScroll-item-tickers'><span class='views-liScroll-tick-field'>  
+  <div class="views-field views-field-nothing">        <span class="field-content">FCTCEPT  : Paiement des coupons d’intérêts et / ou remboursement de capital    le <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-02-27T00:00:00+00:00">27 février 2026</span>,            | </span>  </div></span></li><li class='views-liScroll-item views-liScroll-item-tickers'><span class='views-liScroll-tick-field'>  
+  <div class="views-field views-field-nothing">        <span class="field-content">NOURMONY HOLDING  : Paiement des coupons d’intérêts et / ou remboursement de capital    le <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-02-26T00:00:00+00:00">26 février 2026</span>,            | </span>  </div></span></li><li class='views-liScroll-item views-liScroll-item-tickers'><span class='views-liScroll-tick-field'>  
+  <div class="views-field views-field-nothing">        <span class="field-content">FCTCEPT  : Paiement des coupons d’intérêts et / ou remboursement de capital    le <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-02-27T00:00:00+00:00">27 février 2026</span>,            | </span>  </div></span></li><li class='views-liScroll-item views-liScroll-item-tickers'><span class='views-liScroll-tick-field'>  
+  <div class="views-field views-field-nothing">        <span class="field-content">FCTCEPT  : Paiement des coupons d’intérêts et / ou remboursement de capital    le <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-02-27T00:00:00+00:00">27 février 2026</span>,            | </span>  </div></span></li><li class='views-liScroll-item views-liScroll-item-tickers'><span class='views-liScroll-tick-field'>  
+  <div class="views-field views-field-nothing">        <span class="field-content">FCTCEPT  : Paiement des coupons d’intérêts et / ou remboursement de capital    le <span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2026-02-27T00:00:00+00:00">27 février 2026</span>,            | </span>  </div></span></li></ul></div></div></div>
+<!-- end scroll -->
+    </div>
+  
+  
+  
+  
+  
+  
+</div>
+</section>
+<section id="block-tools-tops" class="block block-tools col-md-4 col-xs-12 clearfix">
+
+      
+  <div class="table-responsive">
+<table class="top-five table table-hover table-striped sticky-enabled">
+ <thead><tr><th class="text-left">Top 5</th><th class="text-right">Cours</th><th class="text-right">Variation</th> </tr></thead>
+<tbody>
+ <tr><td>SLBC</td><td class="text-right">35 540</td><td class="text-right">7,49% <span class="icone-seance good"></span></td> </tr>
+ <tr><td>SAFC</td><td class="text-right">4 970</td><td class="text-right">7,46% <span class="icone-seance good"></span></td> </tr>
+ <tr><td>STAC</td><td class="text-right">1 960</td><td class="text-right">7,40% <span class="icone-seance good"></span></td> </tr>
+ <tr><td>CABC</td><td class="text-right">3 560</td><td class="text-right">7,39% <span class="icone-seance good"></span></td> </tr>
+ <tr><td>ABJC</td><td class="text-right">3 790</td><td class="text-right">7,37% <span class="icone-seance good"></span></td> </tr>
+</tbody>
+</table>
+</div>
+
+</section>
+<section id="block-tools-flops" class="block block-tools col-md-4 col-xs-12 clearfix">
+
+      
+  <div class="table-responsive">
+<table class="flop-five table table-hover table-striped sticky-enabled">
+ <thead><tr><th>Flop 5</th><th class="text-right">Cours</th><th class="text-right">Variation</th> </tr></thead>
+<tbody>
+ <tr><td>UNLC</td><td class="text-right">74 505</td><td class="text-right">-6,86% <span class="icone-seance bad"></span></td> </tr>
+ <tr><td>ONTBF</td><td class="text-right">2 800</td><td class="text-right">-3,11% <span class="icone-seance bad"></span></td> </tr>
+ <tr><td>UNXC</td><td class="text-right">2 295</td><td class="text-right">-2,55% <span class="icone-seance bad"></span></td> </tr>
+ <tr><td>SCRC</td><td class="text-right">1 555</td><td class="text-right">-2,51% <span class="icone-seance bad"></span></td> </tr>
+ <tr><td>BNBC</td><td class="text-right">1 555</td><td class="text-right">-1,58% <span class="icone-seance bad"></span></td> </tr>
+</tbody>
+</table>
+</div>
+
+</section>
+<section id="block-tools-activites-marche" class="block block-tools col-md-4 col-xs-12 clearfix">
+
+      
+  <div class="table-responsive">
+<table class="activity table table-hover table-striped sticky-enabled">
+ <thead><tr><th>Activités du marché</th> </tr></thead>
+<tbody>
+ <tr><td>Valeur des transactions</td><td class="text-right">1 991 948 547 FCFA</td><td></td> </tr>
+ <tr><td>Capitalisation Actions</td><td class="text-right">15 513 955 202 778 FCFA</td><td></td> </tr>
+ <tr><td>Capitalisation des obligations</td><td class="text-right">11 469 604 356 930 FCFA</td><td></td> </tr>
+ <tr><td>BRVM-C</td><td class="text-right">402,38</td><td class="text-right">2,05% <span class="icone-seance good"></span></td><td></td> </tr>
+ <tr><td>BRVM-30</td><td class="text-right">187,34</td><td class="text-right">2,47% <span class="icone-seance good"></span></td><td></td> </tr>
+ <tr><td>BRVM-PRES</td><td class="text-right">159,42</td><td class="text-right">2,57% <span class="icone-seance good"></span></td><td></td> </tr>
+</tbody>
+</table>
+</div>
+
+</section>
+<section id="block-tools-date-maj" class="block block-tools clearfix">
+
+      
+  Dernière mise à jour : Vendredi, 20 février, 2026 - 22:45
+</section>
+<section id="block-system-main" class="block block-system clearfix">
+
+      
+  <article id="node-1" class="node node-page clearfix" about="/fr/node/1" typeof="foaf:Document">
+    <header>
+            <span property="dc:title" content="Accueil" class="rdf-meta element-hidden"></span>      </header>
+        </article>
+
+</section>
+  </div>
+          </div><!-- End row -->
+        </div>
+      </div><!-- End resultat -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+              <div class="region region-prefooter">
+    <section id="block-panels-mini-services" class="block block-panels-mini clearfix">
+
+        <h2 class="block-title">Investissons pour un développement durable et une richesse mieux partagée</h2>
+    
+  <div class="panel-display panel-1col clearfix" id="mini-panel-services">
+  <div class="panel-panel panel-col">
+    <div><div class="panel-pane pane-block pane-block-1 col-md-3 col-xs-12"  >
+  
+        <h2 class="pane-title">
+      Je suis un Débutant    </h2>
+    
+  
+  <div class="pane-content">
+    <div>
+	Je suis un débutant et je m’intéresse à la bourse, son fonctionnement et comment investir.</div>
+<p><a class="espace_pro_link" href="/fr/comment-investir-la-brvm">Entrer</a></p>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-block-2 col-md-3 col-xs-12"  >
+  
+        <h2 class="pane-title">
+      Je suis un Emetteur    </h2>
+    
+  
+  <div class="pane-content">
+    <div>
+	Je suis une entreprise (privée ou publique) ou un Etat et je souhaite obtenir des informations sur comment être coté ou lever des fonds sur le marché boursier régional.</div>
+<p><a class="espace_pro_link" href="/fr/comment-etre-cote-la-brvm">Entrer</a></p>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-block-3 col-md-3 col-xs-12"  >
+  
+        <h2 class="pane-title">
+      Je suis un Financier    </h2>
+    
+  
+  <div class="pane-content">
+    <div>
+	J’exerce dans la finance et je souhaite obtenir des informations financières sur les sociétés cotées.</div>
+<p><a class="espace_pro_link" href="/fr/rapports-societes-cotees">Entrer</a></p>
+  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-block-4 col-md-3 col-xs-12"  >
+  
+        <h2 class="pane-title">
+      Je suis un Investisseur    </h2>
+    
+  
+  <div class="pane-content">
+    <div>
+	Je suis un investisseur de la BRVM et souhaite suivre le marché et mon portefeuille boursier.</div>
+<p><a class="espace_pro_link" href="/resume">Entrer</a></p>
+  </div>
+
+  
+  </div>
+</div>
+  </div>
+</div>
+
+</section>
+  </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu_footer">
+    <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="region region-menu-footer">
+    <section id="block-menu-menu-main-menu-footer" class="block block-menu clearfix">
+
+      
+  <ul class="menu nav"><li class="first collapsed"><a href="/fr/emetteurs/societes-cotees">Emetteurs</a></li>
+<li class="leaf"><a href="/fr/intervenants/sgi/tous">Courtiers (SGI)</a></li>
+<li class="collapsed"><a href="/fr/societes-de-gestion-d-opcvm">Sociétés de Gestion d&#039;OPCVM (SGO)</a></li>
+<li class="collapsed"><a href="/fr/conseils-en-investissements-boursiers">Conseils en investissements boursiers</a></li>
+<li class="collapsed"><a href="/fr/intervenants/sgp/tous">Sociétés de Gestion de Patrimoine</a></li>
+<li class="collapsed"><a href="/fr/intervenants/conservateurs/tous">Banques Teneurs de Compte - Conservateurs</a></li>
+<li class="collapsed"><a href="/fr/apporteurs-d-affaires/tous">Apporteurs d&#039;affaires et démarcheurs</a></li>
+<li class="collapsed"><a href="/fr/autres-acteurs/garants">Garants</a></li>
+<li class="collapsed"><a href="/fr/autres-acteurs/agences-de-notation">Agences de notation</a></li>
+<li class="leaf"><a href="/fr/liens-utiles">Liens utiles</a></li>
+<li class="leaf"><a href="/fr/node/405">Mentions légales</a></li>
+<li class="last leaf"><a href="/fr/sitemap">Plan du site</a></li>
+</ul>
+</section>
+  </div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+  <!-- SECTION FOOTER-->
+  <div class="box_footer">
+          <div class="container">
+        <div class="row foot">
+          <div class="col-xs-12 wow fadeInUp">
+              <div class="region region-footer">
+    <section id="block-block-5" class="block block-block clearfix">
+
+      
+  <p>Bourse Régionale des Valeurs Mobilières - 18, Rue Joseph Anoma. Abidjan - Côte d'Ivoire Contact: (225) 27 20 32 66 85</p>
+
+</section>
+  </div>
+            <div class="author">
+              <p>Powered by <img src="/sites/all/themes/custom/brvm/images/logo-pi.png" alt="author logo"/></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+</div>
+  <script src="https://www.brvm.org/sites/all/themes/contrib/bootstrap/js/bootstrap.js?t8t0gy"></script>
+</body>
+</html>

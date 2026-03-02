@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, HostLis
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { init, dispose, Chart, KLineData, getSupportedIndicators } from 'klinecharts';
+import { init, dispose, Chart, KLineData, getSupportedIndicators, registerIndicator } from 'klinecharts';
 
 @Component({
   selector: 'app-trading',
@@ -72,7 +72,8 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
     { code: 'SMA', label: 'SMA', color: '#8BC34A' },
     { code: 'VOL', label: 'Volume', color: '#9E9E9E' },
     { code: 'OBV', label: 'On Balance Volume', color: '#607D8B' },
-    { code: 'KDJ', label: 'Stochastique', color: '#FF4081' }
+    { code: 'KDJ', label: 'Stochastique', color: '#FF4081' },
+    { code: 'ICHIMOKU', label: 'Ichimoku Cloud', color: '#00ACC1' }
   ];
 
   // runtime state for whether an indicator is currently shown
@@ -82,6 +83,10 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
   activeDrawingTool = 'cursor';
   // keep a history of created overlay ids so we can undo or clear
   overlayIds: string[] = [];
+
+  // ichimoku-specific overlay id & subscription
+  ichimokuOverlayId: string | null = null;
+  ichimokuVisibleHandler: ((data: any) => void) | null = null;
   // remember which timeframe each overlay was created in so we can
   // selectively hide/show when the user switches period
   overlayTimeframe: Record<string, '1D' | '1W' | '1M'> = {};
@@ -324,19 +329,37 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
     this.indicators[code] = !this.indicators[code];
 
     if (this.indicators[code]) {
-      if (code === 'BOLL') {
-        // overlay on candle pane rather than own pane
+      // show on main candle pane for indicators that overlay (BOLL, ICHIMOKU)
+      if (code === 'BOLL' || code === 'ICHIMOKU') {
         this.chart.createIndicator(code, true, { id: 'candle_pane' });
       } else {
         const paneId = `pane_${code.toLowerCase()}`;
         this.chart.createIndicator(code, false, { id: paneId, height: 100 });
       }
+      if (code === 'ICHIMOKU') {
+        // draw cloud immediately and wire update on visible range
+        this.drawIchimokuCloud();
+        const handler = () => this.drawIchimokuCloud();
+        this.ichimokuVisibleHandler = handler;
+        this.chart.subscribeAction('onVisibleRangeChange', handler);
+      }
     } else {
-      if (code === 'BOLL') {
+      if (code === 'BOLL' || code === 'ICHIMOKU') {
         this.chart.removeIndicator({ paneId: 'candle_pane', name: code });
       } else {
         const paneId = `pane_${code.toLowerCase()}`;
         this.chart.removeIndicator({ paneId, name: code });
+      }
+      if (code === 'ICHIMOKU') {
+        // remove cloud overlay and unsubscribe
+        if (this.ichimokuOverlayId && this.chart) {
+          this.chart.removeOverlay({ id: this.ichimokuOverlayId });
+          this.ichimokuOverlayId = null;
+        }
+        if (this.ichimokuVisibleHandler && this.chart) {
+          this.chart.unsubscribeAction('onVisibleRangeChange', this.ichimokuVisibleHandler);
+          this.ichimokuVisibleHandler = null;
+        }
       }
     }
   }
@@ -535,12 +558,111 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  // helper to draw the Ichimoku cloud as a filled polygon over the candle pane
+  private drawIchimokuCloud() {
+    if (!this.chart) return;
+    const dataList: any[] = this.chart.getDataList();
+    if (!dataList || !dataList.length) return;
+
+    const [p1, p2, p3] = [9, 26, 52];
+    const getMid = (period: number, idx: number) => {
+      if (idx < period - 1) return null;
+      const slice = dataList.slice(idx - period + 1, idx + 1);
+      const high = Math.max(...slice.map(d => d.high));
+      const low = Math.min(...slice.map(d => d.low));
+      return (high + low) / 2;
+    };
+
+    const spanA: Array<number | null> = [];
+    const spanB: Array<number | null> = [];
+    dataList.forEach((d, i) => {
+      spanA[i] = (getMid(p1, i) != null && getMid(p2, i) != null)
+        ? ((getMid(p1, i)! + getMid(p2, i)!) / 2)
+        : null;
+      spanB[i] = getMid(p3, i);
+    });
+
+    // `getVisibleRangeDataList` is not part of the public typings; cast to any
+    const visible: any[] = (this.chart as any).getVisibleRangeDataList() || [];
+    const points: any[] = [];
+    visible.forEach((v: any) => {
+      const i = v.dataIndex;
+      if (spanA[i] != null) points.push({ x: v.x, y: spanA[i] });
+    });
+    for (let k = visible.length - 1; k >= 0; k--) {
+      const i = visible[k].dataIndex;
+      if (spanB[i] != null) points.push({ x: visible[k].x, y: spanB[i] });
+    }
+
+    if (this.ichimokuOverlayId && this.chart) {
+      this.chart.removeOverlay({ id: this.ichimokuOverlayId });
+    }
+    if (points.length) {
+      const created = this.chart.createOverlay({
+        name: 'polygon',
+        paneId: 'candle_pane',
+        points,
+        styles: {
+          polygon: {
+            color: 'rgba(0,172,193,0.15)',
+            borderColor: '#00ACC1',
+            borderSize: 1
+          }
+        }
+      });
+      if (typeof created === 'string') {
+        this.ichimokuOverlayId = created;
+      } else if (Array.isArray(created) && created.length) {
+        this.ichimokuOverlayId = created[0];
+      }
+    }
+  }
+
   // ─── Chart Init ───────────────────────────────────────────────────────
   private initChart() {
     const el = document.getElementById('klinechart-main');
     if (!el) return;
 
-    this.chart = init('klinechart-main', {
+    // register Ichimoku indicator (custom) before initialising the chart
+    registerIndicator({
+      name: 'ICHIMOKU',
+      shortName: 'ICHI',
+      calcParams: [9, 26, 52],
+      figures: [
+        { key: 'tenkan', title: 'Tenkan: ', type: 'line' },
+        { key: 'kijun', title: 'Kijun: ', type: 'line' },
+        { key: 'chikou', title: 'Chikou: ', type: 'line' },
+        { key: 'spanA', title: 'SpanA: ', type: 'line' },
+        { key: 'spanB', title: 'SpanB: ', type: 'line' }
+      ],
+      calc: (dataList: any[], { calcParams }) => {
+        const [p1, p2, p3] = calcParams;
+
+        const getMidPrice = (period: number, index: number) => {
+          if (index < period - 1) return null;
+          const slice = dataList.slice(index - period + 1, index + 1);
+          const high = Math.max(...slice.map(d => d.high));
+          const low = Math.min(...slice.map(d => d.low));
+          return (high + low) / 2;
+        };
+
+        return dataList.map((kLineData, i) => ({
+          tenkan: getMidPrice(p1, i),
+          kijun: getMidPrice(p2, i),
+          spanA: null, // filled later
+          spanB: getMidPrice(p3, i),
+          chikou: kLineData.close
+        })).map((result: any, i: number, all: any[]) => {
+          // calculate spanA for past bars, projection will be handled by chart
+          result.spanA = (result.tenkan != null && result.kijun != null)
+            ? ((result.tenkan + result.kijun) / 2)
+            : null;
+          return result;
+        });
+      }
+    });
+
+    const initOptions: any = {
       styles: {
         grid: {
           horizontal: { color: '#2a2e39' },
@@ -585,8 +707,12 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         }
       },
-      locale: 'en-US'
-    });
+      locale: 'en-US',
+      // reserve extra space on the right for forward-projected lines like Ichimoku
+      rightOffset: 100
+    };
+
+    this.chart = init('klinechart-main', initOptions);
 
     if (!this.chart) return;
 

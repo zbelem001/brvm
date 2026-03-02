@@ -1,0 +1,278 @@
+[
+    {
+        "symbol": "SDSC.ci",
+        "name": "AFRICA GLOBAL LOGISTICS"
+    },
+    {
+        "symbol": "BOAB.bj",
+        "name": "BANK OF AFRICA BENIN"
+    },
+    {
+        "symbol": "BOABF.bf",
+        "name": "BANK OF AFRICA BURKINA FASO"
+    },
+    {
+        "symbol": "BOAC.ci",
+        "name": "BANK OF AFRICA CI"
+    },
+    {
+        "symbol": "BOAM.ml",
+        "name": "BANK OF AFRICA MALI"
+    },
+    {
+        "symbol": "BOAN.ne",
+        "name": "BANK OF AFRICA NIGER"
+    },
+    {
+        "symbol": "BOAS.sn",
+        "name": "BANK OF AFRICA SENEGAL"
+    },
+    {
+        "symbol": "BICB.bj",
+        "name": "BANQUE INTERNATIONALE POUR LE COMMERCE DU BENIN"
+    },
+    {
+        "symbol": "BNBC.ci",
+        "name": "BERNABE"
+    },
+    {
+        "symbol": "BICC.ci",
+        "name": "BICICI"
+    },
+    {
+        "symbol": "BRVMAG",
+        "name": "BRVM - AGRICULTURE"
+    },
+    {
+        "symbol": "BRVMAS",
+        "name": "BRVM - AUTRES SECTEURS"
+    },
+    {
+        "symbol": "BRVM-CB",
+        "name": "BRVM - CONSOMMATION DE BASE"
+    },
+    {
+        "symbol": "BRVM-CD",
+        "name": "BRVM - CONSOMMATION DISCRETIONNAIRE"
+    },
+    {
+        "symbol": "BRVMDI",
+        "name": "BRVM - DISTRIBUTION"
+    },
+    {
+        "symbol": "BRVM-EN",
+        "name": "BRVM - ENERGIE"
+    },
+    {
+        "symbol": "BRVMFI",
+        "name": "BRVM - FINANCE"
+    },
+    {
+        "symbol": "BRVMIN",
+        "name": "BRVM - INDUSTRIE"
+    },
+    {
+        "symbol": "BRVM-IN",
+        "name": "BRVM - INDUSTRIELS"
+    },
+    {
+        "symbol": "BRVMPR",
+        "name": "BRVM - PRESTIGE"
+    },
+    {
+        "symbol": "BRVMPA",
+        "name": "BRVM - PRINCIPAL"
+    },
+    {
+        "symbol": "BRVM-SF",
+        "name": "BRVM - SERVICES FINANCIERS"
+    },
+    {
+        "symbol": "BRVMSP",
+        "name": "BRVM - SERVICES PUBLICS"
+    },
+    {
+        "symbol": "BRVM-SP",
+        "name": "BRVM - SERVICES PUBLICS"
+    },
+    {
+        "symbol": "BRVM-TEL",
+        "name": "BRVM - TELECOMMUNICATIONS"
+    },
+    {
+        "symbol": "BRVMTR",
+        "name": "BRVM - TRANSPORT"
+    },
+    {
+        "symbol": "BRVM30",
+        "name": "BRVM 30"
+    },
+    {
+        "symbol": "BRVMC",
+        "name": "BRVM COMPOSITE"
+    },
+    {
+        "symbol": "CAPIBRVM",
+        "name": "Capitalisation BRVM"
+    },
+    {
+        "symbol": "CFAC.ci",
+        "name": "CFAO CI"
+    },
+    {
+        "symbol": "CIEC.ci",
+        "name": "CIE CI"
+    },
+    {
+        "symbol": "CBIBF.bf",
+        "name": "CORIS BANK INTERNATIONAL BF"
+    },
+    {
+        "symbol": "SEMC.ci",
+        "name": "CROWN SIEM"
+    },
+    {
+        "symbol": "ECOC.ci",
+        "name": "ECOBANK CI"
+    },
+    {
+        "symbol": "SIVC.ci",
+        "name": "ERIUM"
+    },
+    {
+        "symbol": "ETIT.tg",
+        "name": "ETI TG"
+    },
+    {
+        "symbol": "FTSC.ci",
+        "name": "FILTISAC CI"
+    },
+    {
+        "symbol": "SIKAIDX",
+        "name": "INDICE SIKAFINANCE"
+    },
+    {
+        "symbol": "LNBB.bj",
+        "name": "LOTERIE NATIONALE DU BENIN"
+    },
+    {
+        "symbol": "SVOC.ci",
+        "name": "MOVIS CI"
+    },
+    {
+        "symbol": "NEIC.ci",
+        "name": "NEI CEDA CI"
+    },
+    {
+        "symbol": "NTLC.ci",
+        "name": "NESTLE CI"
+    },
+    {
+        "symbol": "NSBC.ci",
+        "name": "NSIA BANQUE"
+    },
+    {
+        "symbol": "ONTBF.bf",
+        "name": "ONATEL BF"
+    },
+    {
+        "symbol": "ORGT.tg",
+        "name": "ORAGROUP TOGO"
+    },
+    {
+        "symbol": "ORAC.ci",
+        "name": "ORANGE CI"
+    },
+    {
+        "symbol": "PALC.ci",
+        "name": "PALMCI"
+    },
+    {
+        "symbol": "SAFC.ci",
+        "name": "SAFCA CI"
+    },
+    {
+        "symbol": "SPHC.ci",
+        "name": "SAPH CI"
+    },
+    {
+        "symbol": "ABJC.ci",
+        "name": "SERVAIR ABIDJAN CI"
+    },
+    {
+        "symbol": "STAC.ci",
+        "name": "SETAO CI"
+    },
+    {
+        "symbol": "SGBC.ci",
+        "name": "SGBCI"
+    },
+    {
+        "symbol": "CABC.ci",
+        "name": "SICABLE CI"
+    },
+    {
+        "symbol": "SICC.ci",
+        "name": "SICOR"
+    },
+    {
+        "symbol": "SIKATR",
+        "name": "SIKA TOTAL RETURN"
+    },
+    {
+        "symbol": "STBC.ci",
+        "name": "SITAB"
+    },
+    {
+        "symbol": "SMBC.ci",
+        "name": "SMB CI"
+    },
+    {
+        "symbol": "SIBC.ci",
+        "name": "SOCIETE IVOIRIENNE DE BANQUE CI"
+    },
+    {
+        "symbol": "SDCC.ci",
+        "name": "SODECI"
+    },
+    {
+        "symbol": "SOGC.ci",
+        "name": "SOGB"
+    },
+    {
+        "symbol": "SLBC.ci",
+        "name": "SOLIBRA CI"
+    },
+    {
+        "symbol": "SNTS.sn",
+        "name": "SONATEL"
+    },
+    {
+        "symbol": "SCRC.ci",
+        "name": "SUCRIVOIRE"
+    },
+    {
+        "symbol": "TTLC.ci",
+        "name": "TOTAL CI"
+    },
+    {
+        "symbol": "TTLS.sn",
+        "name": "TOTAL SENEGAL"
+    },
+    {
+        "symbol": "PRSC.ci",
+        "name": "TRACTAFRIC MOTORS CI"
+    },
+    {
+        "symbol": "UNLC.ci",
+        "name": "UNILEVER CI"
+    },
+    {
+        "symbol": "UNXC.ci",
+        "name": "UNIWAX CI"
+    },
+    {
+        "symbol": "SHEC.ci",
+        "name": "VIVO ENERGY CI"
+    }
+]
