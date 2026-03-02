@@ -58,6 +58,17 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
   // can be different in development vs production.
   private apiUrl = environment.apiUrl;
 
+  // helper that constructs a full URL from a path fragment.  this keeps
+  // callers from accidentally requesting the root address (which returns a
+  // 404) and centralises the base URL logic in one place.
+  private api(path: string): string {
+    // ensure a leading slash so callers can just pass "tickers-list".
+    if (!path.startsWith("/")) {
+      path = "/" + path;
+    }
+    return `${this.apiUrl}${path}`;
+  }
+
   watchlist: any[] = [];
   selectedAsset: any = null;
   lastCandle: any = null;
@@ -146,7 +157,9 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // ─── Tickers & Watchlist ──────────────────────────────────────────────
   private loadTickers() {
-    this.http.get<any[]>(`${this.apiUrl}/tickers-list`).subscribe({
+    // note: do not call the bare backend root; it returns 404.  use the
+    // helper above so the path is always appended correctly.
+    this.http.get<any[]>(this.api('/tickers-list')).subscribe({
       next: (data) => {
         this.allTickers = data;
 
@@ -176,7 +189,7 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadWatchlist() {
-    this.http.get<any[]>(`${this.apiUrl}/watchlist`).subscribe({
+    this.http.get<any[]>(this.api('/watchlist')).subscribe({
       next: (data: any[]) => {
         // remember full result in tickerInfo for use by picker
         this.tickerInfo = {};
@@ -744,7 +757,7 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
         const paddedFrom = new Date(from).getTime() - padMs;
         const paddedTo   = new Date(to).getTime()   + padMs;
 
-        const url = `${this.apiUrl}/history/${this.selectedAsset.symbol}` +
+        const url = this.api(`/history/${this.selectedAsset.symbol}`) +
                     `?from=${paddedFrom}&to=${paddedTo}`;
         console.log('Fetching history from:', url);
         this.http.get<any>(url).subscribe({
