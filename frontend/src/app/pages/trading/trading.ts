@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { init, dispose, Chart, KLineData, getSupportedIndicators, registerIndicator } from 'klinecharts';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-trading',
@@ -53,7 +54,9 @@ export class TradingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // ─── State ────────────────────────────────────────────────────────────
-  private apiUrl = 'http://localhost:8000';
+  // base URL for the backend API; pulled from environment config so it
+  // can be different in development vs production.
+  private apiUrl = environment.apiUrl;
 
   watchlist: any[] = [];
   selectedAsset: any = null;
