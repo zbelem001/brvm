@@ -18,9 +18,13 @@ RUN npm run build -- --output-path=dist/frontend
 
 # --- production image ------------------------------------------------------
 FROM nginx:alpine
-# copy built assets from builder (copy contents, not the folder itself)
+
 # remove default nginx page to avoid serving it if the build output is empty or misplaced
 RUN rm -rf /usr/share/nginx/html/*
+
+# use custom nginx configuration so SPA routes fall back to index.html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # copy the actual built app from the angular dist/browser folder
 # the build output puts runtime files inside a 'browser' directory
 COPY --from=builder /app/dist/frontend/browser/ /usr/share/nginx/html/
